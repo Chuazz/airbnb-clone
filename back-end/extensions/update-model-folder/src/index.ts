@@ -3,6 +3,8 @@ import { randomUUID } from 'crypto';
 import type { ActionHandler } from '@directus/types/dist/events';
 
 const updateImageFolder: ActionHandler = async (e, meta) => {
+	console.log(e);
+
 	if (e.payload.image) {
 		const key = e.keys[0];
 		const imageKey = e.payload.image;
@@ -39,4 +41,6 @@ export default defineHook(({ action }) => {
 	action('products.items.update', updateImageFolder);
 
 	action('product_categories.items.update', updateImageFolder);
+
+	action('directus_users.items.update', updateImageFolder);
 });

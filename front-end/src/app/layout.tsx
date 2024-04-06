@@ -3,7 +3,7 @@ import type { Metadata } from 'next';
 import { CookiesProvider } from 'next-client-cookies/server';
 
 export const metadata: Metadata = {
-	title: '136 Mobile',
+	title: 'Airbnb',
 };
 
 const RootLayout = ({ children }: PageType) => {

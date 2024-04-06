@@ -22,7 +22,7 @@ services:
    # default sqlite
    directus:
       image: directus/directus:10.10.4
-      container_name: project-name
+      container_name: Airbnb
       restart: unless-stopped
       ports:
          - 8055:8055
