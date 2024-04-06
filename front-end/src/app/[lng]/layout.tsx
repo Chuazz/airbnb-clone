@@ -1,24 +1,30 @@
 /* eslint-disable @next/next/no-css-tags */
 'use client';
 
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { QueryCache, QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { PageType } from '@type/page-type';
 import { dir } from 'i18next';
 import { Inter } from 'next/font/google';
 import { APIOptions, PrimeReactProvider } from 'primereact/api';
-import { Bounce, ToastContainer } from 'react-toastify';
+import { Bounce, toast, ToastContainer } from 'react-toastify';
 
 import '@asset/styles/global.css';
+import { ModalProvider } from '@provider/modal-provider';
+import { ReduxProvider } from '@root/src/providers/redux-provider';
 import 'primeicons/primeicons.css';
 import 'react-toastify/dist/ReactToastify.css';
 import 'slick-carousel/slick/slick-theme.css';
 import 'slick-carousel/slick/slick.css';
 import '/node_modules/primeflex/primeflex.css';
-import { ReduxProvider } from '@root/src/providers/redux-provider';
-import { ModalProvider } from '@provider/modal-provider';
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+	queryCache: new QueryCache({
+		onError(error) {
+			toast.error(error.message);
+		},
+	}),
+});
 
 const primeValue: Partial<APIOptions> = { ripple: true };
 
@@ -42,13 +48,13 @@ const AppLayout = ({ children, params: { lng } }: PageType) => {
 			<body className='m-0'>
 				<main className={inter.className}>
 					<ReduxProvider>
-						<ModalProvider>
-							<QueryClientProvider client={queryClient}>
-								<ReactQueryDevtools initialIsOpen={false} />
+						<QueryClientProvider client={queryClient}>
+							<ReactQueryDevtools initialIsOpen={false} />
 
+							<ModalProvider>
 								<PrimeReactProvider value={primeValue}>{children}</PrimeReactProvider>
-							</QueryClientProvider>
-						</ModalProvider>
+							</ModalProvider>
+						</QueryClientProvider>
 					</ReduxProvider>
 
 					<ToastContainer

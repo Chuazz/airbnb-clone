@@ -3,5 +3,10 @@
 	"name": "Name",
 	"email": "Email",
 	"first_name": "First name",
-	"last_name": "Last name"
+	"last_name": "Last name",
+	"translation": "Translation",
+	"language_region": "Language and region",
+	"currency": "Currency",
+	"auto_translate_description_reviews_to": "Automatically translate descriptions and reviews to {{ language }}.",
+	"choose_language_region": "Choose a language and region"
 }

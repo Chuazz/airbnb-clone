@@ -1,5 +1,5 @@
 type ModalType = {
-	onClose?: () => void;
+	onClose: () => void;
 };
 
 export type { ModalType };

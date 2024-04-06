@@ -4,9 +4,12 @@ import { TbDoorEnter, TbFingerprintScan, TbUserPlus } from 'react-icons/tb';
 import { FaFingerprint } from 'react-icons/fa';
 import { AiFillAliwangwang } from 'react-icons/ai';
 import { TbDoorExit } from 'react-icons/tb';
-import { BsEnvelopeArrowUpFill } from 'react-icons/bs';
+import { BsEnvelopeArrowUpFill, BsTranslate } from 'react-icons/bs';
 import { LiaExclamationCircleSolid } from 'react-icons/lia';
 import { IoIosHelpCircleOutline } from 'react-icons/io';
+import { RiGlobalLine } from 'react-icons/ri';
+import { HiMiniXMark } from 'react-icons/hi2';
+import { IoCheckmark } from 'react-icons/io5';
 
 const iconConfig = {
 	'fi-phone': FiPhone,
@@ -20,6 +23,10 @@ const iconConfig = {
 	'bs-envelope-arrow-up-fill': BsEnvelopeArrowUpFill,
 	'lia-exclamation-circle-solid': LiaExclamationCircleSolid,
 	'io-ios-help-circle-outline': IoIosHelpCircleOutline,
+	'ri-global-line': RiGlobalLine,
+	'ih-mini-x-mark': HiMiniXMark,
+	'bs-translate': BsTranslate,
+	'io-checkmark': IoCheckmark,
 };
 
 export { iconConfig };

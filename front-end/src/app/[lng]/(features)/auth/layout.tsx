@@ -1,4 +1,4 @@
-import AuthImage from '@asset/images/im_auth.jpg';
+import AuthImage from '@asset/images/img-auth.jpg';
 import { PageType } from '@type/page-type';
 
 const AuthLayout = async ({ params: { lng }, children }: PageType) => {

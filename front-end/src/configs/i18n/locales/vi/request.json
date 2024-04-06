@@ -1,4 +1,5 @@
 {
 	"INVALID_CREDENTIALS": "Thông tin đăng nhập không hợp lệ",
-	"RECORD_NOT_UNIQUE": "Một tài khoản đã tồn tại với email mà bạn cung cấp"
+	"RECORD_NOT_UNIQUE": "Một tài khoản đã tồn tại với email mà bạn cung cấp",
+	"FORBIDDEN": "Bạn không có quyền truy cập vào dữ liệu này"
 }

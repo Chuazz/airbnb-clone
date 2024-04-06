@@ -5,18 +5,24 @@ const LANGUAGES = [FALLBACK_LNG, 'vi'];
 const DEFAULT_NS = 'common';
 
 const supportLanguage = {
-	vi: 'vi',
-	en: 'en',
+	vi: {
+		code: 'vi',
+		translate: 'Tiếng Việt',
+	},
+	en: {
+		code: 'en',
+		translate: 'English',
+	},
 };
 
 const supportLanguages: OptionType[] = [
 	{
-		code: supportLanguage.vi,
-		label: 'Việt Nam',
+		code: supportLanguage.vi.code,
+		label: supportLanguage.vi.translate,
 	},
 	{
-		code: supportLanguage.en,
-		label: 'English',
+		code: supportLanguage.en.code,
+		label: supportLanguage.en.translate,
 	},
 ];
 

@@ -1,12 +1,15 @@
 import { DEFAULT_NS, FALLBACK_LNG, supportLanguage } from '@config/i18n';
+import { PageParamType } from '@type/page-type';
 import { createInstance } from 'i18next';
+import { useParams } from 'next/navigation';
 import { initReactI18next } from 'react-i18next/initReactI18next';
 
-const useTranslation = (language: keyof typeof supportLanguage, options: any = {}) => {
+const useTranslation = (language?: keyof typeof supportLanguage, options: any = {}) => {
 	const i18nextInstance = createInstance();
+	const { lng } = useParams<PageParamType>();
 
 	i18nextInstance.use(initReactI18next).init({
-		lng: language,
+		lng: language || lng,
 		ns: DEFAULT_NS,
 		resources: {
 			en: {
@@ -31,8 +34,9 @@ const useTranslation = (language: keyof typeof supportLanguage, options: any = {
 	});
 
 	return {
-		t: i18nextInstance.getFixedT(language, DEFAULT_NS, options.keyPrefix),
+		t: i18nextInstance.getFixedT(language || lng, DEFAULT_NS, options.keyPrefix),
 		i18n: i18nextInstance,
+		lng,
 	};
 };
 

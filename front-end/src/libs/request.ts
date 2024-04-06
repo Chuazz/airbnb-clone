@@ -103,6 +103,10 @@ const logout = () => {
 	cookies.set('is_login', false);
 };
 
+const setToken = () => {
+	client.setToken(cookies.get('access_token'));
+};
+
 const http = { get, post, remove, update };
 
-export { http, request, login, logout };
+export { http, request, login, logout, setToken };

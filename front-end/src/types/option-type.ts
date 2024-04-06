@@ -1,10 +1,11 @@
 import { ReactNode } from 'react';
 
 type OptionType = {
-	label: string;
-	subLabel?: string;
 	code: string;
+	label?: string;
+	subLabel?: string;
 	icon?: ReactNode;
+	component?: ReactNode;
 	action?: () => void;
 };
 

@@ -19,7 +19,7 @@ import { Button } from 'primereact/button';
 import { Divider } from 'primereact/divider';
 import { Controller, useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
-import { ChangeLanguage } from './_components/ChangeLanguage';
+import { ChangeLanguage } from './_components/change-language';
 
 const LoginPage = ({ params: { lng } }: PageType) => {
 	const { t } = useTranslation(lng);

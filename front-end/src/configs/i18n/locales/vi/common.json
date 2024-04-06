@@ -3,5 +3,10 @@
 	"name": "Họ tên",
 	"email": "Email",
 	"first_name": "Họ tên",
-	"last_name": "Tên"
+	"last_name": "Tên",
+	"translation": "Bản dịch",
+	"language_region": "Ngôn ngữ và khu vực",
+	"currency": "Loại tiền tệ",
+	"auto_translate_description_reviews_to": "Tự động dịch mô tả và đánh giá sang {{ language }}.",
+	"choose_language_region": "Chọn một ngôn ngữ và khu vực"
 }

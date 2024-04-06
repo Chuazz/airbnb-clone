@@ -1,5 +1,5 @@
 import { modal } from '@config/modal-config';
-import { modalSlice } from '@redux/slices/modal';
+import { modalSlice } from '@redux/slices/modal-slice';
 import { useSelector } from '@redux/store';
 import { CustomDialogProps, ModalContextType, OpenPropType } from '@type/context/modal-context-type';
 import { ModalProviderType } from '@type/provider/modal-provider-type';
@@ -16,8 +16,8 @@ const ModalContext = createContext<ModalContextType>({
 const ModalProvider = ({ children }: ModalProviderType) => {
 	const { show, active } = useSelector((state) => state.modal);
 	const dispatch = useDispatch();
-	const [props, setProps] = useState<{ modalProps?: any; dialogProps?: CustomDialogProps }>();
 	const DialogContent = active ? modal[active] : () => <></>;
+	const [props, setProps] = useState<{ modalProps?: any; dialogProps?: CustomDialogProps }>();
 
 	const close = () => {
 		dispatch(modalSlice.actions.close());
@@ -47,7 +47,10 @@ const ModalProvider = ({ children }: ModalProviderType) => {
 				className='shadow-none'
 				content={
 					<div
-						className={classNames('p-4 bg-white shadow-3 border-round-2xl', props?.dialogProps?.className)}
+						className={classNames(
+							'bg-white shadow-3 border-round-2xl overflow-hidden',
+							props?.dialogProps?.className,
+						)}
 						style={props?.dialogProps?.style}
 					>
 						<DialogContent

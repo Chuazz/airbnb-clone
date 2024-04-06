@@ -1,7 +1,7 @@
-import GoogleIcon from '@asset/icons/ic_google.png';
-import AuthImage from '@asset/images/im_auth.jpg';
-import ENFlagIcon from '@asset/icons/ic_en_flag_circle.png';
-import VIFlagIcon from '@asset/icons/ic_vi_flag_circle.png';
+import ENFlagIcon from '@asset/icons/ic-en-flag-circle.png';
+import GoogleIcon from '@asset/icons/ic-google.png';
+import VIFlagIcon from '@asset/icons/ic-vi-flag-circle.png';
+import AuthImage from '@asset/images/img-auth.jpg';
 
 const imageConfig = {
 	'google-icon': GoogleIcon,
