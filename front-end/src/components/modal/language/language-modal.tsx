@@ -40,7 +40,12 @@ const LanguageModal = ({ onClose }: LanguageModalType) => {
 				</div>
 			</div>
 
-			<div className='overflow-auto overflow-x-hidden flex flex-column gap-6'>
+			<div
+				className='overflow-auto overflow-x-hidden flex flex-column gap-6'
+				style={{
+					maxHeight: 'calc(100vh - 190px)',
+				}}
+			>
 				<div className='flex align-items-start gap-3 border-bottom-1 border-300'>
 					{tabs.map((tab) => (
 						<div key={tab.code}>

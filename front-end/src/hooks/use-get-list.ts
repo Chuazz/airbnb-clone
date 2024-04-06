@@ -3,11 +3,10 @@ import { readItems } from '@directus/sdk';
 import { client } from '@lib/directus';
 import { setToken } from '@lib/request';
 import { useQuery } from '@tanstack/react-query';
-import { LanguageCollectionType } from '@type/collection/language-collection-type';
 import { GetListType } from '@type/query/get-list-type';
 
-const useGetList = ({ collection, query, useQueryOption, t }: GetListType) => {
-	return useQuery<any, Error, LanguageCollectionType[]>({
+const useGetList = <ItemType = any>({ collection, query, useQueryOption, t }: GetListType<ItemType>) => {
+	return useQuery<any, Error, ItemType[]>({
 		...useQueryOption,
 		refetchOnMount: false,
 		refetchInterval: false,

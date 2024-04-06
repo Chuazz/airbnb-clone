@@ -10,6 +10,7 @@ import { motion } from 'framer-motion';
 import { useRouter } from '@hook/use-router';
 import { useSelector } from '@redux/store';
 import { useModal } from '@hook/use-modal';
+import { LanguagesCollectionType } from '@type/collection/languages-collection-type';
 
 const Region = () => {
 	const { t, lng } = useTranslation();
@@ -18,9 +19,16 @@ const Region = () => {
 	const router = useRouter();
 	const { close } = useModal();
 
-	const languagesQuery = useGetList({
+	const languagesQuery = useGetList<LanguagesCollectionType>({
 		t,
 		collection: 'languages',
+		query: {
+			filter: {
+				status: {
+					_eq: 'published',
+				},
+			},
+		},
 	});
 
 	return (

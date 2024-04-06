@@ -8,5 +8,6 @@
 	"language_region": "Ngôn ngữ và khu vực",
 	"currency": "Loại tiền tệ",
 	"auto_translate_description_reviews_to": "Tự động dịch mô tả và đánh giá sang {{ language }}.",
-	"choose_language_region": "Chọn một ngôn ngữ và khu vực"
+	"choose_language_region": "Chọn ngôn ngữ và khu vực",
+	"choose_currency": "Chọn loại tiền tệ"
 }
