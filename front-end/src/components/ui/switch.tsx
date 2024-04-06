@@ -26,7 +26,7 @@ const Switch = ({ width = 50, value, onChange }: SwitchType) => {
 					translateX: 2,
 				}}
 				animate={{
-					translateX: value ? Math.ceil(height / 2 + 1) : 2,
+					translateX: value ? height / 2 : 2,
 				}}
 			>
 				{value && (
