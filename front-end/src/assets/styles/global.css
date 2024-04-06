@@ -1,0 +1,25 @@
+@import url('./custom/ckeditor.css');
+@import url('./custom/prime.css');
+@import url('./variables.css');
+
+body {
+	height: 100%;
+	overflow-x: hidden;
+	overflow-y: auto;
+	font-weight: normal;
+	color: var(--text-color);
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+p {
+	margin: 0;
+}
+
+a {
+	text-decoration: none;
+}
+
+.border-rounded {
+	border-radius: 99999px;
+}

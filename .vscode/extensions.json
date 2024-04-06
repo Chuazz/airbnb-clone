@@ -1,0 +1,14 @@
+{
+	"recommendations": [
+		"dbaeumer.vscode-eslint",
+		"usernamehw.errorlens",
+		"formulahendry.auto-close-tag",
+		"formulahendry.auto-rename-tag",
+		"neotan.vscode-auto-restart-typescript-eslint-servers",
+		"streetsidesoftware.code-spell-checker",
+		"ms-vscode.vscode-typescript-next",
+		"christian-kohler.npm-intellisense",
+		"esbenp.prettier-vscode",
+		"YoavBls.pretty-ts-errors"
+	]
+}
