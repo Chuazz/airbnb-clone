@@ -6,10 +6,7 @@ import { logout } from '@lib/request';
 
 const AppPage = () => {
 	return (
-		<div
-			className='min-h-screen'
-			style={{ padding: '0 80px' }}
-		>
+		<div className='min-h-screen'>
 			<Header />
 
 			<Link

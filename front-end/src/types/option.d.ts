@@ -1,7 +1,7 @@
 import { ReactNode } from 'react';
 
-type OptionType = {
-	code: string;
+type OptionType<CodeType = string> = {
+	code: CodeType;
 	label?: string;
 	subLabel?: string;
 	icon?: ReactNode;

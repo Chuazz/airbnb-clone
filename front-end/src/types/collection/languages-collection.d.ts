@@ -1,5 +1,5 @@
 import { supportLanguage } from '@config/i18n';
-import { BaseCollectionType } from './base-collection-type';
+import { BaseCollectionType } from './base-collection';
 
 type LanguagesCollectionType = BaseCollectionType & {
 	name: string;

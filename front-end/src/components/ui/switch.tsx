@@ -1,4 +1,4 @@
-import { SwitchType } from '@type/ui/switch-type';
+import { SwitchType } from '@type/ui/switch-ui';
 import { motion } from 'framer-motion';
 import { ReactIcon } from './react-icon';
 

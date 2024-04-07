@@ -1,4 +1,4 @@
-import { OptionType } from '@type/option-type';
+import { OptionType } from '@type/option';
 
 const FALLBACK_LNG = 'en';
 const LANGUAGES = [FALLBACK_LNG, 'vi'];

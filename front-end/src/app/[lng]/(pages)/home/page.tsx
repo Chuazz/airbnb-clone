@@ -1,7 +1,7 @@
 'use client';
 
 import { request } from '@root/src/libs/request';
-import { PageType } from '@type/page-type';
+import { PageType } from '@type/page';
 import { Button } from 'primereact/button';
 
 const HomePage = ({ params: { lng } }: PageType) => {

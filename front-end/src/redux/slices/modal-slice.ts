@@ -1,6 +1,6 @@
 import { modal } from '@config/modal-config';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { ModalSliceType } from '@type/slice/modal-slice-type';
+import { ModalSliceType } from '@type/slice/modal-slice';
 
 const initialState: ModalSliceType = {
 	show: false,

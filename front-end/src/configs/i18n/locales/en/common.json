@@ -9,5 +9,8 @@
 	"currency": "Currency",
 	"auto_translate_description_reviews_to": "Automatically translate descriptions and reviews to {{ language }}.",
 	"choose_language_region": "Choose a language and region",
-	"choose_currency": "Choose a currency"
+	"choose_currency": "Choose a currency",
+	"stays": "Stays",
+	"experiences": "Experiences",
+	"online_experiences": "Online Experiences"
 }

@@ -3,7 +3,7 @@
 import { route } from '@config/routes';
 import { appSlice } from '@redux/slices/app-slice';
 import { useDispatch } from '@redux/store';
-import { PageParamType } from '@type/page-type';
+import { PageParamType } from '@type/page';
 import { default as NextLink } from 'next/link';
 import { useParams } from 'next/navigation';
 import { Ripple } from 'primereact/ripple';

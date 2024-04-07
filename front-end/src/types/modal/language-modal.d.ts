@@ -1,4 +1,4 @@
-import { ModalType } from './modal-type';
+import { ModalType } from './modal';
 
 type LanguageModalType = ModalType & {};
 

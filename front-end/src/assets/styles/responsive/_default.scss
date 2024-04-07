@@ -1,0 +1,7 @@
+@import './_breakpoint.scss';
+
+@include breakpoint(0) {
+	.col-2-5 {
+		flex-basis: calc(100% / 5);
+	}
+}

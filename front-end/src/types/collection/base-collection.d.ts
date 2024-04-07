@@ -1,4 +1,4 @@
-import { CollectionStatusType } from '@type/common-type';
+import { CollectionStatusType } from '@type/common';
 
 type BaseCollectionType = {
 	id: string;

@@ -1,18 +1,22 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { HeaderTabType } from '@type/common-type';
-import { SearchBarSliceType } from '@type/slice/search-bar-slice-type';
+import { HeaderChildrenTabType, HeaderParentTabType } from '@type/common';
+import { SearchBarSliceType } from '@type/slice/search-bar-slice';
 
 const initialState: SearchBarSliceType = {
 	visible: true,
-	active: 'stays',
+	parentActive: 'stays',
+	childrenActive: 'where',
 };
 
 const searchBarSlice = createSlice({
 	name: 'search-bar',
 	initialState,
 	reducers: {
-		setActive(state, action: PayloadAction<HeaderTabType>) {
-			state.active = action.payload;
+		setParentActive(state, action: PayloadAction<HeaderParentTabType>) {
+			state.parentActive = action.payload;
+		},
+		setChildrenActive(state, action: PayloadAction<HeaderChildrenTabType>) {
+			state.childrenActive = action.payload;
 		},
 		setVisible(state, action: PayloadAction<boolean>) {
 			state.visible = action.payload;

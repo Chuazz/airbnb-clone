@@ -1,0 +1,13 @@
+.text-shadow {
+	text-align: center;
+
+	&::after {
+		display: block;
+		content: attr(data-content);
+		font-weight: bold;
+		height: 1px;
+		color: transparent;
+		overflow: hidden;
+		visibility: hidden;
+	}
+}

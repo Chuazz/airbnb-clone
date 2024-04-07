@@ -1,5 +1,5 @@
 import { DEFAULT_NS, FALLBACK_LNG, supportLanguage } from '@config/i18n';
-import { PageParamType } from '@type/page-type';
+import { PageParamType } from '@type/page';
 import { createInstance } from 'i18next';
 import { useParams } from 'next/navigation';
 import { initReactI18next } from 'react-i18next/initReactI18next';

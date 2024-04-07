@@ -2,8 +2,8 @@ import { baseURL, resetPasswordCallBack } from '@config/routes';
 import { AuthenticationData, createUser, passwordRequest, passwordReset, readItems, readUsers } from '@directus/sdk';
 import { client } from '@root/src/libs/directus';
 import { useMutation } from '@tanstack/react-query';
-import { LoginType, RegisterType, ResetPasswordType } from '@type/auth-type';
-import { PageParamType } from '@type/page-type';
+import { LoginType, RegisterType, ResetPasswordType } from '@type/auth';
+import { PageParamType } from '@type/page';
 import { useParams } from 'next/navigation';
 
 const useLoginMutate = () => {

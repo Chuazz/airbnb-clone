@@ -1,4 +1,4 @@
-import { LoginType, RegisterType, ResetPasswordType } from '@type/auth-type';
+import { LoginType, RegisterType, ResetPasswordType } from '@type/auth';
 import { TFunction } from 'i18next';
 import { z } from 'zod';
 

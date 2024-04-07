@@ -1,4 +1,4 @@
-import { ConfirmModalType } from '@type/modal/confirm-modal-type';
+import { ConfirmModalType } from '@type/modal/confirm-modal';
 import { Button } from 'primereact/button';
 
 const ConfirmModal = ({ onClose, onAgree, onCancel }: ConfirmModalType) => {

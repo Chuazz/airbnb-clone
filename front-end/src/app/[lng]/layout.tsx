@@ -3,15 +3,15 @@
 
 import { QueryCache, QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
-import { PageType } from '@type/page-type';
+import { PageType } from '@type/page';
 import { dir } from 'i18next';
 import { Inter } from 'next/font/google';
 import { APIOptions, PrimeReactProvider } from 'primereact/api';
 import { Bounce, toast, ToastContainer } from 'react-toastify';
-
-import '@asset/styles/global.css';
 import { ModalProvider } from '@provider/modal-provider';
-import { ReduxProvider } from '@root/src/providers/redux-provider';
+import { useSelector } from '@redux/store';
+
+import '@asset/styles/global.scss';
 import 'primeicons/primeicons.css';
 import 'react-toastify/dist/ReactToastify.css';
 import 'slick-carousel/slick/slick-theme.css';
@@ -31,6 +31,8 @@ const primeValue: Partial<APIOptions> = { ripple: true };
 const inter = Inter({ subsets: ['vietnamese', 'latin'] });
 
 const AppLayout = ({ children, params: { lng } }: PageType) => {
+	const show = useSelector((state) => state.modal.show);
+
 	return (
 		<html
 			lang={lng}
@@ -45,17 +47,20 @@ const AppLayout = ({ children, params: { lng } }: PageType) => {
 				/>
 			</head>
 
-			<body className='m-0'>
+			<body
+				className='m-0'
+				style={{
+					overflow: show ? 'hidden' : 'auto',
+				}}
+			>
 				<main className={inter.className}>
-					<ReduxProvider>
-						<QueryClientProvider client={queryClient}>
-							<ReactQueryDevtools initialIsOpen={false} />
+					<QueryClientProvider client={queryClient}>
+						<ReactQueryDevtools initialIsOpen={false} />
 
-							<ModalProvider>
-								<PrimeReactProvider value={primeValue}>{children}</PrimeReactProvider>
-							</ModalProvider>
-						</QueryClientProvider>
-					</ReduxProvider>
+						<ModalProvider>
+							<PrimeReactProvider value={primeValue}>{children}</PrimeReactProvider>
+						</ModalProvider>
+					</QueryClientProvider>
 
 					<ToastContainer
 						position='top-right'

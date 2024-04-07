@@ -1,6 +1,5 @@
-@import url('./custom/ckeditor.css');
-@import url('./custom/prime.css');
-@import url('./variables.css');
+@import './custom/index.scss';
+@import './responsive/index.scss';
 
 body {
 	height: 100%;
@@ -24,6 +23,8 @@ a {
 	border-radius: 99999px;
 }
 
-.col-2-5 {
-	flex-basis: calc(100% / 5);
+.absolute-center {
+	position: absolute;
+	left: 50%;
+	transform: translateX(-50%);
 }

@@ -2,7 +2,7 @@ import { supportLanguage } from '@config/i18n';
 import { route } from '@config/routes';
 import { appSlice } from '@redux/slices/app-slice';
 import { useDispatch } from '@redux/store';
-import { PageParamType } from '@type/page-type';
+import { PageParamType } from '@type/page';
 import { useRouter as useNextRouter, useParams } from 'next/navigation';
 
 const useRouter = () => {

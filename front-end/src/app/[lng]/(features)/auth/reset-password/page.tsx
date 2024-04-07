@@ -8,7 +8,7 @@ import { EmailTab } from './_components/EmailTab';
 import { NewPasswordTab } from './_components/NewPasswordTab';
 import { ReactIcon } from '@component/ui/react-icon';
 import { useTranslation } from '@hook/use-translation';
-import { PageType } from '@type/page-type';
+import { PageType } from '@type/page';
 
 const ResetPasswordPage = ({ params: { lng } }: PageType) => {
 	const params = useSearchParams();

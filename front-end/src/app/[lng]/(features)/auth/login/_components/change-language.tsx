@@ -1,8 +1,8 @@
 import { Image } from '@component/ui/image';
 import { supportLanguage, supportLanguages } from '@config/i18n';
 import { useRouter } from '@hook/use-router';
-import { OptionType } from '@type/option-type';
-import { PageParamType } from '@type/page-type';
+import { OptionType } from '@type/option';
+import { PageParamType } from '@type/page';
 import { useParams } from 'next/navigation';
 import { Dropdown, DropdownProps } from 'primereact/dropdown';
 

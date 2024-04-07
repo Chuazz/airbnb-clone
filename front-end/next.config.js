@@ -1,4 +1,6 @@
 /** @type {import('next').NextConfig} */
+const path = require('path');
+
 const nextConfig = {
 	async redirects() {
 		return [
@@ -17,6 +19,9 @@ const nextConfig = {
 
 		return config;
 	},
+	sassOptions: {
+		includePaths: [path.join(__dirname, 'styles')],
+	},
 };
 
-export default nextConfig;
+module.exports = nextConfig;

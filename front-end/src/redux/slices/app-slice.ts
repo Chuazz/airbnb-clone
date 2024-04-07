@@ -1,6 +1,6 @@
 import { route } from '@config/routes';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { AppSliceType } from '@type/slice/app-slice-type';
+import { AppSliceType } from '@type/slice/app-slice';
 
 const initialState: AppSliceType = {
 	page: 'root',

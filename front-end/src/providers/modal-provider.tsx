@@ -1,8 +1,8 @@
 import { modal } from '@config/modal-config';
 import { modalSlice } from '@redux/slices/modal-slice';
 import { useSelector } from '@redux/store';
-import { CustomDialogProps, ModalContextType, OpenPropType } from '@type/context/modal-context-type';
-import { ModalProviderType } from '@type/provider/modal-provider-type';
+import { CustomDialogProps, ModalContextType, OpenPropType } from '@type/context/modal-context';
+import { ModalProviderType } from '@type/provider/modal-provider';
 import { Dialog } from 'primereact/dialog';
 import { classNames } from 'primereact/utils';
 import { createContext, useState } from 'react';

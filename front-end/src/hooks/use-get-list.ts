@@ -3,7 +3,7 @@ import { readItems } from '@directus/sdk';
 import { client } from '@lib/directus';
 import { setToken } from '@lib/request';
 import { useQuery } from '@tanstack/react-query';
-import { GetListType } from '@type/query/get-list-type';
+import { GetListType } from '@type/query/get-list-query';
 
 const useGetList = <ItemType = any>({ collection, query, useQueryOption, t }: GetListType<ItemType>) => {
 	return useQuery<any, Error, ItemType[]>({

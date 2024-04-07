@@ -1,7 +1,7 @@
 import { ReactIcon } from '@component/ui/react-icon';
 import { useTranslation } from '@hook/use-translation';
-import { LanguageModalType } from '@type/modal/language-modal-type';
-import { OptionType } from '@type/option-type';
+import { LanguageModalType } from '@type/modal/language-modal';
+import { OptionType } from '@type/option';
 import { motion } from 'framer-motion';
 import { useState } from 'react';
 import { Currency } from './components/currency';

@@ -4,7 +4,7 @@ import { useModal } from '@hook/use-modal';
 import { useRouter } from '@hook/use-router';
 import { useTranslation } from '@hook/use-translation';
 import { useSelector } from '@redux/store';
-import { CurrenciesCollectionType } from '@type/collection/currencies-collection-type';
+import { CurrenciesCollectionType } from '@type/collection/currencies-collection';
 import { motion } from 'framer-motion';
 import { classNames } from 'primereact/utils';
 

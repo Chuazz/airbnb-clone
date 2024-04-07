@@ -5,7 +5,7 @@ import { RightBar } from './right-bar';
 const Header = () => {
 	return (
 		<div
-			className='flex align-items-center'
+			className='flex align-items-center justify-content-between shadow-1 app-padding'
 			style={{ height: 80 }}
 		>
 			<div className='text-red-500'>
