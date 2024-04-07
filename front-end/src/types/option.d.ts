@@ -1,11 +1,17 @@
-import { ReactNode } from 'react';
+import { CSSProperties, ReactNode } from 'react';
 
 type OptionType<CodeType = string> = {
 	code: CodeType;
 	label?: string;
 	subLabel?: string;
+	shouldShow?: boolean;
+	disable?: boolean;
+	badge?: number;
+	showBadge?: boolean;
+	className?: string;
 	icon?: ReactNode;
-	component?: ReactNode;
+	styles?: CSSProperties;
+	divide?: boolean;
 	action?: () => void;
 };
 

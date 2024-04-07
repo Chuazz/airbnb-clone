@@ -129,7 +129,10 @@ const LoginPage = ({ params: { lng } }: PageType) => {
 						/>
 					</div>
 
-					<Divider align='center'>
+					<Divider
+						align='center'
+						className='my-5'
+					>
 						<p className='text-sm text-600'>{t('common:or').toLowerCase()}</p>
 					</Divider>
 

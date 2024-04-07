@@ -4,6 +4,7 @@ import VIFlagIcon from '@asset/icons/ic-vi-flag-circle.png';
 import AuthImage from '@asset/images/img-auth.jpg';
 
 const imageConfig = {
+	'server': '',
 	'google-icon': GoogleIcon,
 	'auth-image': AuthImage,
 	'en-flag-icon': ENFlagIcon,

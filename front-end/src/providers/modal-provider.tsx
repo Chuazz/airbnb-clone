@@ -1,29 +1,27 @@
-import { modal } from '@config/modal-config';
+import { modalConfig } from '@config/modal-config';
 import { modalSlice } from '@redux/slices/modal-slice';
 import { useSelector } from '@redux/store';
-import { CustomDialogProps, ModalContextType, OpenPropType } from '@type/context/modal-context';
-import { ModalProviderType } from '@type/provider/modal-provider';
+import { CustomDialogProps, ModalContextType, OpenModalType } from '@type/context/modal-context';
 import { Dialog } from 'primereact/dialog';
 import { classNames } from 'primereact/utils';
-import { createContext, useState } from 'react';
+import { createContext, PropsWithChildren, useState } from 'react';
 import { useDispatch } from 'react-redux';
 
 const ModalContext = createContext<ModalContextType>({
 	close() {},
 	open() {},
 });
-
-const ModalProvider = ({ children }: ModalProviderType) => {
+const ModalProvider = ({ children }: PropsWithChildren) => {
 	const { show, active } = useSelector((state) => state.modal);
 	const dispatch = useDispatch();
-	const DialogContent = active ? modal[active] : () => <></>;
+	const DialogContent = active ? modalConfig[active] : () => <></>;
 	const [props, setProps] = useState<{ modalProps?: any; dialogProps?: CustomDialogProps }>();
 
 	const close = () => {
 		dispatch(modalSlice.actions.close());
 	};
 
-	const open = ({ name, dialogProps, modalProps }: OpenPropType) => {
+	const open = ({ name, dialogProps, modalProps }: OpenModalType) => {
 		dispatch(modalSlice.actions.open(name));
 
 		setProps({

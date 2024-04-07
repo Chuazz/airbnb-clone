@@ -1,8 +1,8 @@
-import { modal } from '@config/modal-config';
+import { modalConfig } from '@config/modal-config';
 
 type ModalSliceType = {
 	show?: boolean;
-	active?: keyof typeof modal;
+	active?: keyof typeof modalConfig;
 };
 
 export type { ModalSliceType };

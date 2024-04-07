@@ -1,4 +1,4 @@
-import { modal } from '@config/modal-config';
+import { modalConfig } from '@config/modal-config';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { ModalSliceType } from '@type/slice/modal-slice';
 
@@ -11,7 +11,7 @@ const modalSlice = createSlice({
 	name: 'modal',
 	initialState,
 	reducers: {
-		open(state, action: PayloadAction<keyof typeof modal>) {
+		open(state, action: PayloadAction<keyof typeof modalConfig>) {
 			state.active = action.payload;
 			state.show = true;
 		},

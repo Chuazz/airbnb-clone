@@ -14,12 +14,12 @@ const LanguageModal = ({ onClose }: LanguageModalType) => {
 	const tabs: OptionType[] = [
 		{
 			code: 'region',
-			label: t('common:language_region'),
+			label: t('menu:language_region'),
 		},
 
 		{
 			code: 'currency',
-			label: t('common:currency'),
+			label: t('menu:currency'),
 		},
 	];
 

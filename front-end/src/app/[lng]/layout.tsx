@@ -17,6 +17,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import 'slick-carousel/slick/slick-theme.css';
 import 'slick-carousel/slick/slick.css';
 import '/node_modules/primeflex/primeflex.css';
+import { OverlayProvider } from '@provider/overlay-provider';
 
 const queryClient = new QueryClient({
 	queryCache: new QueryCache({
@@ -58,7 +59,9 @@ const AppLayout = ({ children, params: { lng } }: PageType) => {
 						<ReactQueryDevtools initialIsOpen={false} />
 
 						<ModalProvider>
-							<PrimeReactProvider value={primeValue}>{children}</PrimeReactProvider>
+							<OverlayProvider>
+								<PrimeReactProvider value={primeValue}>{children}</PrimeReactProvider>
+							</OverlayProvider>
 						</ModalProvider>
 					</QueryClientProvider>
 

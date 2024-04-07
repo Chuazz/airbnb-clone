@@ -7,6 +7,7 @@ const ChangeLanguage = () => {
 	const onLanguageClick = () => {
 		open({
 			name: 'language',
+			modalProps: {},
 			dialogProps: {
 				style: {
 					width: '70vw',
@@ -23,6 +24,7 @@ const ChangeLanguage = () => {
 			<ReactIcon
 				icon='ri-global-line'
 				size={20}
+				color='var(--surface-900)'
 			/>
 		</div>
 	);

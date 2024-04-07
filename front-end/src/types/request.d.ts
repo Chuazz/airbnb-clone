@@ -1,6 +1,8 @@
+import { AxiosResponse } from "axios";
+
 type MetaType = {};
 
-type ResponseWithArray<T = any> = {
+type ResponseWithArray<T = any> = AxiosResponse & {
 	data: T[];
 };
 

@@ -14,15 +14,15 @@ const SearchBar = () => {
 	const tabs: OptionType<HeaderParentTabType>[] = [
 		{
 			code: 'stays',
-			label: t('common:stays'),
+			label: t('menu:stays'),
 		},
 		{
 			code: 'experiences',
-			label: t('common:experiences'),
+			label: t('menu:experiences'),
 		},
 		{
 			code: 'online_experiences',
-			label: t('common:online_experiences'),
+			label: t('menu:online_experiences'),
 		},
 	];
 

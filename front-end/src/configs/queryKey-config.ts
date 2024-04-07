@@ -1,18 +1,16 @@
-import { collectionConfig } from './collection-config';
+import { Query } from '@directus/sdk';
 
-type QueryKeyConfigType = {
-	// eslint-disable-next-line no-unused-vars
-	[_key in keyof typeof collectionConfig]: { listAll: string[]; list: (_query?: any) => any[] };
-};
-
-const queryKeyConfig: QueryKeyConfigType = {
+const queryKeyConfig = {
 	languages: {
 		listAll: ['languages'],
-		list: (query?: any) => ['list', 'languages', query],
+		list: (query?: Query<any, any>) => ['list', 'languages', query],
 	},
 	currencies: {
 		listAll: ['currencies'],
-		list: (query?: any) => ['list', 'currencies', query],
+		list: (query?: Query<any, any>) => ['list', 'currencies', query],
+	},
+	users: {
+		me: ['my-profile'],
 	},
 };
 

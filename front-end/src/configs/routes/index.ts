@@ -2,7 +2,7 @@ import { authRoute, authRoutes } from './auth';
 import { privateRoute, privateRoutes } from './private';
 import { pubicRoute } from './public';
 
-const baseURL = 'http://localhost:3000/';
+const baseURL = 'http://localhost:3000';
 
 const DEFAULT_LOGIN_REDIRECT = pubicRoute.root;
 

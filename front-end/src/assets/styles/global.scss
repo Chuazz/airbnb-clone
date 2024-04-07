@@ -28,3 +28,7 @@ a {
 	left: 50%;
 	transform: translateX(-50%);
 }
+
+.object-cover {
+	object-fit: cover;
+}

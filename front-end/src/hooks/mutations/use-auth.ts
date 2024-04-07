@@ -54,7 +54,7 @@ const useRequestResetPasswordMutate = () => {
 			// 	throw new Error('no_record_found');
 			// }
 
-			const response = await client.request(passwordRequest(email, `${baseURL}${lng}${resetPasswordCallBack}`));
+			const response = await client.request(passwordRequest(email, `${baseURL}/${lng}${resetPasswordCallBack}`));
 
 			return response;
 		},

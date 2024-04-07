@@ -1,23 +1,23 @@
+import { apiConfig } from '@config/api-config';
 import { queryKeyConfig } from '@config/queryKey-config';
-import { readItems } from '@directus/sdk';
-import { client } from '@lib/directus';
-import { setToken } from '@lib/request';
+import { http } from '@lib/request';
+import { parseDirectusQuery } from '@lib/util';
 import { useQuery } from '@tanstack/react-query';
 import { GetListType } from '@type/query/get-list-query';
 
 const useGetList = <ItemType = any>({ collection, query, useQueryOption, t }: GetListType<ItemType>) => {
 	return useQuery<any, Error, ItemType[]>({
 		...useQueryOption,
-		refetchOnMount: false,
-		refetchInterval: false,
+		refetchOnWindowFocus: false,
 		queryKey: queryKeyConfig[collection].list(query),
+		select(data) {
+			return data?.data;
+		},
 		queryFn: async () => {
-			setToken();
-
 			try {
-				const response = await client.request(readItems(collection as any, query));
+				const response = await http.get(apiConfig[collection] + '?' + parseDirectusQuery(query));
 
-				return response;
+				return response.data;
 			} catch (error: any) {
 				if (error.errors && Array.isArray(error.errors)) {
 					throw new Error(t(`request:${error.errors[0].extensions.code}`));

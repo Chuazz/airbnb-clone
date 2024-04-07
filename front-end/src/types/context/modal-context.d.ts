@@ -1,4 +1,4 @@
-import { modal } from '@config/modal-config';
+import { modalConfig } from '@config/modal-config';
 import { DialogProps } from 'primereact/dialog';
 
 interface CustomDialogProps
@@ -18,15 +18,15 @@ interface CustomDialogProps
 	onHide?: () => void;
 }
 
-type OpenPropType<MP = any> = {
-	name: keyof typeof modal;
+type OpenModalType<MP = any> = {
+	name: keyof typeof modalConfig;
 	modalProps?: MP;
 	dialogProps?: CustomDialogProps;
 };
 
 type ModalContextType = {
-	open: <MP = any>(_data: OpenPropType<MP>) => void;
+	open: (_data: OpenModalType) => void;
 	close: () => void;
 };
 
-export type { ModalContextType, CustomDialogProps, OpenPropType };
+export type { ModalContextType, CustomDialogProps, OpenModalType };

@@ -1,7 +1,8 @@
 import { FcGoogle } from 'react-icons/fc';
 import { FiPhone } from 'react-icons/fi';
 import { TbDoorEnter, TbFingerprintScan, TbUserPlus } from 'react-icons/tb';
-import { FaFingerprint } from 'react-icons/fa';
+import { FaFingerprint, FaUserCircle } from 'react-icons/fa';
+import { FaBars } from 'react-icons/fa6';
 import { AiFillAliwangwang } from 'react-icons/ai';
 import { TbDoorExit } from 'react-icons/tb';
 import { BsEnvelopeArrowUpFill, BsTranslate } from 'react-icons/bs';
@@ -27,6 +28,8 @@ const iconConfig = {
 	'ih-mini-x-mark': HiMiniXMark,
 	'bs-translate': BsTranslate,
 	'io-checkmark': IoCheckmark,
+	'fa-user-circle': FaUserCircle,
+	'fa-bars': FaBars,
 };
 
 export { iconConfig };
