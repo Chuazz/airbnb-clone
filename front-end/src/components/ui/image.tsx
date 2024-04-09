@@ -1,6 +1,5 @@
-import { apiConfig } from '@config/api-config';
+import { customApi } from '@config/api/custom-api';
 import { imageConfig } from '@config/image-config';
-import { baseURL } from '@config/routes';
 import { Image as PrimeImage, ImageProps as PrimeImageProps } from 'primereact/image';
 import { classNames } from 'primereact/utils';
 
@@ -15,7 +14,7 @@ const Image = ({ src, ...props }: ImageProps) => {
 		let result = '';
 
 		if (src === 'server') {
-			return process.env.NEXT_PUBLIC_DIRECTUS_PROJECT_URL + apiConfig.files + '/' + props.id;
+			return process.env.NEXT_PUBLIC_DIRECTUS_PROJECT_URL + customApi.files + '/' + props.id;
 		}
 
 		if (imageConfig[src]) {

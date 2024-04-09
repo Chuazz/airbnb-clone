@@ -9,7 +9,7 @@ import { BsEnvelopeArrowUpFill, BsTranslate } from 'react-icons/bs';
 import { LiaExclamationCircleSolid } from 'react-icons/lia';
 import { IoIosHelpCircleOutline } from 'react-icons/io';
 import { RiGlobalLine } from 'react-icons/ri';
-import { HiMiniXMark } from 'react-icons/hi2';
+import { HiMiniMagnifyingGlass, HiMiniXMark } from 'react-icons/hi2';
 import { IoCheckmark } from 'react-icons/io5';
 
 const iconConfig = {
@@ -30,6 +30,7 @@ const iconConfig = {
 	'io-checkmark': IoCheckmark,
 	'fa-user-circle': FaUserCircle,
 	'fa-bars': FaBars,
+	'hi-mini-magnifying-glass': HiMiniMagnifyingGlass,
 };
 
 export { iconConfig };

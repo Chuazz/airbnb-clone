@@ -1,4 +1,4 @@
-import { apiConfig } from '@config/api-config';
+import { getListAPI } from '@config/api/get-list-api';
 import { queryKeyConfig } from '@config/queryKey-config';
 import { http } from '@lib/request';
 import { parseDirectusQuery } from '@lib/util';
@@ -15,12 +15,12 @@ const useGetList = <ItemType = any>({ collection, query, useQueryOption, t }: Ge
 		},
 		queryFn: async () => {
 			try {
-				const response = await http.get(apiConfig[collection] + '?' + parseDirectusQuery(query));
+				const response = await http.get(getListAPI[collection] + '?' + parseDirectusQuery(query));
 
 				return response.data;
 			} catch (error: any) {
 				if (error.errors && Array.isArray(error.errors)) {
-					throw new Error(t(`request:${error.errors[0].extensions.code}`));
+					throw new Error(t?.(`request:${error.errors[0].extensions.code}`));
 				}
 			}
 		},

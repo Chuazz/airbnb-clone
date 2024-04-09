@@ -4,8 +4,9 @@ import { SearchBarSliceType } from '@type/slice/search-bar-slice';
 
 const initialState: SearchBarSliceType = {
 	visible: true,
+	searching: false,
 	parentActive: 'stays',
-	childrenActive: 'where',
+	childrenActive: undefined,
 };
 
 const searchBarSlice = createSlice({
@@ -15,11 +16,14 @@ const searchBarSlice = createSlice({
 		setParentActive(state, action: PayloadAction<HeaderParentTabType>) {
 			state.parentActive = action.payload;
 		},
-		setChildrenActive(state, action: PayloadAction<HeaderChildrenTabType>) {
+		setChildrenActive(state, action: PayloadAction<HeaderChildrenTabType | undefined>) {
 			state.childrenActive = action.payload;
 		},
 		setVisible(state, action: PayloadAction<boolean>) {
 			state.visible = action.payload;
+		},
+		setSearching(state, action: PayloadAction<boolean>) {
+			state.searching = action.payload;
 		},
 	},
 });

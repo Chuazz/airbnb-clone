@@ -6,7 +6,7 @@ const useCookies = () => {
 	const { get, remove, set } = useNextClientCookies();
 
 	const getCookie = <T>(key: keyof typeof cookieConfig): T => {
-		return parse(get(key)) as T;
+		return parse(get(key));
 	};
 
 	const removeCookie = (key: keyof typeof cookieConfig, options?: CookieAttributes | undefined) => {

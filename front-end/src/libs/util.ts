@@ -10,9 +10,7 @@ const parse = (object?: any) => {
 		if (object) {
 			return JSON.parse(object);
 		}
-	} catch (error) {
-		console.log('🚀 ~ parse ~ error:', error);
-	}
+	} catch (error) {}
 
 	return object;
 };

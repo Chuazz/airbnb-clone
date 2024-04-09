@@ -11,6 +11,7 @@ const queryKeyConfig = {
 	},
 	users: {
 		me: ['my-profile'],
+		list: (query?: Query<any, any>) => ['list', 'users', query],
 	},
 };
 

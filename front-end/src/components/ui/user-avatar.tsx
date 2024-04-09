@@ -4,10 +4,15 @@ import { Image } from './image';
 import { ReactIcon } from './react-icon';
 
 const UserAvatar = () => {
-	const { data } = useGetMyProfile();
 	const { getCookie } = useCookies();
+	const isLogin = getCookie<boolean>('is_login');
+	const { data } = useGetMyProfile({
+		useQueryOption: {
+			enabled: !!isLogin,
+		},
+	});
 
-	return getCookie<boolean>('is_login') ? (
+	return isLogin ? (
 		data?.avatar ? (
 			<Image
 				alt=''

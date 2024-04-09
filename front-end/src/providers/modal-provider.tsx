@@ -1,11 +1,10 @@
 import { modalConfig } from '@config/modal-config';
 import { modalSlice } from '@redux/slices/modal-slice';
-import { useSelector } from '@redux/store';
+import { useDispatch, useSelector } from '@redux/store';
 import { CustomDialogProps, ModalContextType, OpenModalType } from '@type/context/modal-context';
 import { Dialog } from 'primereact/dialog';
 import { classNames } from 'primereact/utils';
 import { createContext, PropsWithChildren, useState } from 'react';
-import { useDispatch } from 'react-redux';
 
 const ModalContext = createContext<ModalContextType>({
 	close() {},

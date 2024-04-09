@@ -6,12 +6,14 @@ import { classNames } from 'primereact/utils';
 import { motion } from 'framer-motion';
 import { useRouter } from '@hook/use-router';
 import { logout } from '@lib/request';
+import { useOverlay } from '@hook/use-overlay';
 
 const UserActionOverlay = () => {
 	const { getCookie } = useCookies();
 	const { t } = useTranslation();
 	const isLogin = getCookie<boolean>('is_login');
 	const router = useRouter();
+	const { close } = useOverlay();
 
 	const actions: OptionType[] = [
 		{
@@ -25,6 +27,11 @@ const UserActionOverlay = () => {
 			label: t('auth:login'),
 			shouldShow: !isLogin,
 			divide: true,
+			action() {
+				close();
+
+				router.push('login');
+			},
 		},
 		{
 			code: 'messages',
