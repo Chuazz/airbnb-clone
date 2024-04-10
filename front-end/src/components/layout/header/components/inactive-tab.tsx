@@ -24,13 +24,13 @@ const InactiveTab = () => {
 		},
 		{
 			code: 'who',
-			label: 'Any guests',
+			label: 'Add guests',
 		},
 	];
 
 	return (
 		<div
-			className='flex align-items-center border-rounded'
+			className='flex align-items-center border-rounded gap-3 px-4 border-1 border-200'
 			style={{
 				boxShadow: 'var(--header-shadow)',
 			}}
@@ -38,7 +38,7 @@ const InactiveTab = () => {
 			{tabs.map((tab) => (
 				<div
 					key={tab.code}
-					className={classNames('p-3 flex align-items-center cursor-pointer', tab.className)}
+					className={classNames('py-3 gap-3 flex align-items-center cursor-pointer', tab.className)}
 					onClick={() => {
 						dispatch(searchBarSlice.actions.setChildrenActive(tab.code));
 						dispatch(searchBarSlice.actions.setVisible(true));
@@ -46,6 +46,13 @@ const InactiveTab = () => {
 					}}
 				>
 					<p>{tab.label}</p>
+
+					{tab.divide && (
+						<Divider
+							className='py-1'
+							layout='vertical'
+						/>
+					)}
 				</div>
 			))}
 		</div>

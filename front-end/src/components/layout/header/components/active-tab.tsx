@@ -147,6 +147,10 @@ const ActiveTab = () => {
 		if (searching) {
 			dispatch(searchBarSlice.actions.setSearching(false));
 			dispatch(searchBarSlice.actions.setChildrenActive(undefined));
+
+			if (window.scrollY > 0) {
+				dispatch(searchBarSlice.actions.setVisible(false));
+			}
 		}
 	});
 

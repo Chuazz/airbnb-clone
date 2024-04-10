@@ -52,13 +52,13 @@ const SearchBar = () => {
 			<motion.div
 				className='fixed left-50'
 				initial={{
-					opacity: 1,
-					transform: 'translate(-50%, 0) scale(1)',
+					opacity: 0,
+					transform: 'translate(-50%, -20px) scale(0.3)',
 					transformOrigin: 'top center',
 				}}
 				animate={{
-					transform: !visible ? 'translate(-50%, 0) scale(1)' : 'translate(-50%, -20px) scale(0.3)',
-					opacity: !visible ? 1 : 0,
+					transform: visible ? 'translate(-50%, -20px) scale(0.3)' : 'translate(-50%, 0) scale(1)',
+					opacity: visible ? 0 : 1,
 				}}
 			>
 				<InactiveTab />
