@@ -4,6 +4,7 @@ import { HeaderChildrenTabType } from '@type/common';
 import { OptionType } from '@type/option';
 import { Divider } from 'primereact/divider';
 import { classNames } from 'primereact/utils';
+import { headerStyles } from '..';
 
 const InactiveTab = () => {
 	const parentActiveTab = useSelector((state) => state.searchBar.parentActive);
@@ -30,7 +31,10 @@ const InactiveTab = () => {
 
 	return (
 		<div
-			className='flex align-items-center border-rounded gap-3 px-4 border-1 border-200'
+			className={classNames(
+				'flex align-items-center border-rounded gap-3 px-4 border-1 border-200',
+				headerStyles['container'],
+			)}
 			style={{
 				boxShadow: 'var(--header-shadow)',
 			}}

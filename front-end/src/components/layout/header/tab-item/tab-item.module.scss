@@ -1,0 +1,147 @@
+.container {
+	&::after {
+		position: absolute;
+		content: '';
+		display: none;
+		left: -4px;
+		top: 50%;
+		transform: translateY(-50%);
+		height: 32px;
+		width: 2px;
+	}
+}
+
+.container.active {
+	&::after {
+		display: block;
+		background: #e8e8e8;
+	}
+
+	.container-border {
+		display: none;
+	}
+}
+
+.container-false {
+	&:hover {
+		background: var(--ebebeb);
+	}
+
+	&::after {
+		background: white;
+	}
+}
+
+.container-true {
+	&:hover {
+		background: var(--ddd);
+	}
+
+	&::after {
+		background: var(--ebebeb);
+	}
+}
+
+.container.hover-left:hover {
+	&::after {
+		display: block;
+	}
+}
+
+.container.hover-right:hover {
+	.container-border {
+		display: none;
+	}
+}
+
+.container.hover-both:hover {
+	&::after {
+		display: block;
+	}
+
+	.container-border {
+		display: none;
+	}
+}
+
+.container-border {
+	position: absolute;
+	height: 32px;
+	width: 0.8px;
+	right: -4px;
+	top: 50%;
+	transform: translateY(-50%);
+}
+
+.container-border-false {
+	background: var(--ebebeb);
+}
+
+.container-border-true {
+	background: var(--ddd);
+}
+
+.container.hover-searching-right:hover {
+	border-top-right-radius: 0;
+	border-bottom-right-radius: 0;
+
+	.container-border-true {
+		display: block;
+		background: #d5d5d5;
+		right: -5px;
+		width: 2px;
+		z-index: 2;
+	}
+
+	&::before {
+		position: absolute;
+		content: '';
+		display: block;
+		left: 100%;
+		background: var(--ddd);
+		height: calc(100% + 1px);
+		width: 55px;
+	}
+}
+
+.container.hover-searching-right:hover {
+	border-top-right-radius: 0;
+	border-bottom-right-radius: 0;
+
+	.container-border-true {
+		display: block;
+		background: #d5d5d5;
+		right: -5px;
+		width: 2px;
+		z-index: 2;
+	}
+
+	&::before {
+		position: absolute;
+		content: '';
+		display: block;
+		left: 100%;
+		background: var(--ddd);
+		height: calc(100% + 1px);
+		width: 55px;
+	}
+}
+
+.container.hover-searching-left:hover {
+	border-top-left-radius: 0;
+	border-bottom-left-radius: 0;
+
+	&::after {
+		display: none;
+	}
+
+	&::before {
+		position: absolute;
+		content: '';
+		display: block;
+		right: 100%;
+		background: var(--ddd);
+		height: calc(100% + 1px);
+		width: 55px;
+	}
+}

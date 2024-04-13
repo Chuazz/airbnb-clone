@@ -1,6 +1,6 @@
 import { useTranslation } from '@hook/use-translation';
-import { ChangeLanguage } from './components/change-language';
-import { UserAction } from './components/user-action';
+import { ChangeLanguage } from './modal/change-language';
+import { UserAction } from './modal/user-action';
 import { motion } from 'framer-motion';
 
 const RightBar = () => {

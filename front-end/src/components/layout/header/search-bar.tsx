@@ -2,8 +2,8 @@ import { searchBarSlice } from '@redux/slices/search-bar-slice';
 import { useDispatch, useSelector } from '@redux/store';
 import { useEventListener } from 'primereact/hooks';
 import { useEffect } from 'react';
-import { ActiveTab } from './components/active-tab';
-import { InactiveTab } from './components/inactive-tab';
+import { ActiveTab } from './tab/active-tab';
+import { InactiveTab } from './tab/inactive-tab';
 import { motion } from 'framer-motion';
 
 const SearchBar = () => {

@@ -1,6 +1,6 @@
 import { CSSProperties, ReactNode } from 'react';
 
-type OptionType<CodeType = string> = {
+type OptionType<CodeType = string, ComponentType = any> = {
 	code: CodeType;
 	label?: string;
 	subLabel?: string;
@@ -9,6 +9,7 @@ type OptionType<CodeType = string> = {
 	badge?: number;
 	showBadge?: boolean;
 	className?: string;
+	component?: (_props: ComponentType) => JSX.Element;
 	icon?: ReactNode;
 	styles?: CSSProperties;
 	divide?: boolean;

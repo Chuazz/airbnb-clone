@@ -33,4 +33,16 @@ const parseDirectusQuery = (query?: Query<any, any>) => {
 	return queryString.stringify({ filter, alias, deep, fields, limit, offset, page, search, sort });
 };
 
-export { beauty, parse, parseDirectusQuery };
+const getParentElement = ({ children, parentSelector }: { children: HTMLElement; parentSelector: string }) => {
+	while (children.parentElement) {
+		if (children.parentElement.matches(parentSelector)) {
+			return children.parentElement;
+		}
+
+		children = children.parentElement;
+	}
+
+	return undefined;
+};
+
+export { beauty, parse, parseDirectusQuery, getParentElement };

@@ -7,6 +7,14 @@ const initialState: SearchBarSliceType = {
 	searching: false,
 	parentActive: 'stays',
 	childrenActive: undefined,
+	params: {
+		address: '',
+		guests: {
+			adult: 0,
+			children: 0,
+			pet: 0,
+		},
+	},
 };
 
 const searchBarSlice = createSlice({
