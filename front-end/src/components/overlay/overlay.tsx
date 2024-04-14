@@ -18,6 +18,9 @@ const Overlay = ({ children, content, ...props }: OverlayType) => {
 			<Popover
 				{...props}
 				isOpen={isOpen}
+				onClose={onClose}
+				onOpen={onOpen}
+				isLazy={true}
 			>
 				<PopoverTrigger>
 					<button onClick={onToggle}>{children}</button>
