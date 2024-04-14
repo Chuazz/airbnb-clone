@@ -1,7 +1,6 @@
 'use client';
 
 import { Button } from '@chakra-ui/react';
-import InputPassword from '@component/form/input-password';
 import InputText from '@component/form/input-text';
 import { Image } from '@component/ui/image';
 import { Loading } from '@component/ui/loading';
@@ -120,7 +119,7 @@ const RegisterPage = ({ params: { lng } }: PageType) => {
 						)}
 					/>
 
-					<Controller
+					{/* <Controller
 						name='password'
 						control={control}
 						render={({ field, fieldState }) => (
@@ -135,7 +134,7 @@ const RegisterPage = ({ params: { lng } }: PageType) => {
 								errorMessage={fieldState.error?.message}
 							/>
 						)}
-					/>
+					/> */}
 
 					<Controller
 						name='confirmPassword'

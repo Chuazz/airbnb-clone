@@ -1,13 +1,8 @@
-import { overlayConfig } from '@config/overlay-config';
-
-type OpenOverlayType<OP = any> = {
-	name: keyof typeof overlayConfig;
-	overlayProps?: OP;
-};
-
 type OverlayContextType = {
-	open: (_data: OpenOverlayType) => void;
-	close: () => void;
+	isOpen: boolean;
+	onToggle: () => void;
+	onClose: () => void;
+	onOpen: () => void;
 };
 
-export type { OverlayContextType, OpenOverlayType };
+export type { OverlayContextType };

@@ -1,31 +1,7 @@
-import {
-	FormControl,
-	FormControlProps,
-	FormErrorMessage,
-	FormErrorMessageProps,
-	FormHelperText,
-	FormHelperTextProps,
-	FormLabel,
-	FormLabelProps,
-	Input,
-	InputProps,
-} from '@chakra-ui/react';
+import { FormControl, FormErrorMessage, FormHelperText, FormLabel, Input } from '@chakra-ui/react';
+import { InputTextType } from '@type/form/input-text';
 
-type InputTextProps = {
-	control?: FormControlProps;
-	label?: FormLabelProps;
-	helperText?: FormHelperTextProps;
-	input?: InputProps & {
-		label?: string;
-		helpText?: string;
-		message?: string;
-		onChange?: (_value: string) => void;
-		onBlur?: (_value: string) => void;
-	};
-	error?: FormErrorMessageProps;
-};
-
-const InputText = (props: InputTextProps) => {
+const InputText = (props: InputTextType) => {
 	return (
 		<FormControl {...props.control}>
 			{props.input?.label && <FormLabel {...props.label}>{props.input?.label}</FormLabel>}

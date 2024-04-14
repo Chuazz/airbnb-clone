@@ -1,20 +1,36 @@
-import { Popover, PopoverContent, PopoverTrigger } from '@chakra-ui/react';
+import { Popover, PopoverContent, PopoverTrigger, useDisclosure } from '@chakra-ui/react';
+import { OverlayContextType } from '@type/context/overlay-context';
 import { OverlayType } from '@type/overlay/overlay';
+import { createContext } from 'react';
+
+const OverlayContext = createContext<OverlayContextType>({
+	isOpen: false,
+	onClose() {},
+	onToggle() {},
+	onOpen() {},
+});
 
 const Overlay = ({ children, content, ...props }: OverlayType) => {
-	return (
-		<Popover {...props}>
-			<PopoverTrigger>
-				<button>{children}</button>
-			</PopoverTrigger>
+	const { isOpen, onToggle, onClose, onOpen } = useDisclosure();
 
-			<PopoverContent
-				width='fit-content'
-				overflow='hidden'
+	return (
+		<OverlayContext.Provider value={{ isOpen, onToggle, onClose, onOpen }}>
+			<Popover
+				{...props}
+				isOpen={isOpen}
 			>
-				{content}
-			</PopoverContent>
-		</Popover>
+				<PopoverTrigger>
+					<button onClick={onToggle}>{children}</button>
+				</PopoverTrigger>
+
+				<PopoverContent
+					width='fit-content'
+					overflow='hidden'
+				>
+					{content}
+				</PopoverContent>
+			</Popover>
+		</OverlayContext.Provider>
 	);
 };
-export { Overlay };
+export { Overlay, OverlayContext };

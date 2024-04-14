@@ -1,17 +1,20 @@
 import { Box, Divider, VStack } from '@chakra-ui/react';
 import { useCookies } from '@hook/use-cookies';
+import { useOverlay } from '@hook/use-overlay';
 import { useRouter } from '@hook/use-router';
 import { useTranslation } from '@hook/use-translation';
 import { logout } from '@lib/request';
 import { OptionType } from '@type/option';
 import classNames from 'classnames';
 import { motion } from 'framer-motion';
+import { Overlay } from './overlay';
 
 const UserActionOverlay = () => {
 	const { getCookie } = useCookies();
 	const { t } = useTranslation();
 	const isLogin = getCookie<boolean>('is_login');
 	const router = useRouter();
+	const { onToggle } = useOverlay();
 
 	const actions: OptionType[] = [
 		{
@@ -19,6 +22,9 @@ const UserActionOverlay = () => {
 			label: t('auth:register'),
 			shouldShow: !isLogin,
 			className: 'font-semibold text-900',
+			action() {
+				onToggle();
+			},
 		},
 		{
 			code: 'login',
@@ -35,6 +41,9 @@ const UserActionOverlay = () => {
 			shouldShow: isLogin,
 			className: 'font-semibold text-900',
 			showBadge: isLogin,
+			action() {
+				onToggle();
+			},
 		},
 		{
 			code: 'notifications',
