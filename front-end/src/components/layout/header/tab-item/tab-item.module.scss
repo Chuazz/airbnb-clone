@@ -3,7 +3,7 @@
 		position: absolute;
 		content: '';
 		display: none;
-		left: -4px;
+		left: -5px;
 		top: 50%;
 		transform: translateY(-50%);
 		height: 32px;
@@ -12,6 +12,10 @@
 }
 
 .container.active {
+	&:hover {
+		background: white !important;
+	}
+
 	&::after {
 		display: block;
 		background: #e8e8e8;
@@ -39,6 +43,18 @@
 
 	&::after {
 		background: var(--ebebeb);
+	}
+}
+
+.container-true.hide-border {
+	&::after {
+		display: none;
+	}
+}
+
+.container-true.hover-searching-right {
+	.container-border-true {
+		display: none;
 	}
 }
 
@@ -85,44 +101,13 @@
 	border-top-right-radius: 0;
 	border-bottom-right-radius: 0;
 
-	.container-border-true {
-		display: block;
-		background: #d5d5d5;
-		right: -5px;
-		width: 2px;
-		z-index: 2;
-	}
-
 	&::before {
 		position: absolute;
 		content: '';
 		display: block;
 		left: 100%;
 		background: var(--ddd);
-		height: calc(100% + 1px);
-		width: 55px;
-	}
-}
-
-.container.hover-searching-right:hover {
-	border-top-right-radius: 0;
-	border-bottom-right-radius: 0;
-
-	.container-border-true {
-		display: block;
-		background: #d5d5d5;
-		right: -5px;
-		width: 2px;
-		z-index: 2;
-	}
-
-	&::before {
-		position: absolute;
-		content: '';
-		display: block;
-		left: 100%;
-		background: var(--ddd);
-		height: calc(100% + 1px);
+		height: calc(100% + 2px);
 		width: 55px;
 	}
 }
@@ -141,7 +126,7 @@
 		display: block;
 		right: 100%;
 		background: var(--ddd);
-		height: calc(100% + 1px);
+		height: calc(100% + 2px);
 		width: 55px;
 	}
 }

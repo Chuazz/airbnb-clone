@@ -6,7 +6,7 @@ import { useTranslation } from '@hook/use-translation';
 import { useSelector } from '@redux/store';
 import { CurrenciesCollectionType } from '@type/collection/currencies-collection';
 import { motion } from 'framer-motion';
-import { classNames } from 'primereact/utils';
+import classNames from 'classnames';
 
 const Currency = () => {
 	const { t, lng } = useTranslation();
@@ -45,7 +45,7 @@ const Currency = () => {
 									scale: 1,
 								}}
 								whileHover={{
-									background: 'var(--surface-100)',
+									background: 'var(--chakra-colors-gray-100)',
 								}}
 								whileTap={{
 									scale: 0.95,

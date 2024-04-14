@@ -2,9 +2,9 @@ import { searchBarSlice } from '@redux/slices/search-bar-slice';
 import { useDispatch, useSelector } from '@redux/store';
 import { HeaderChildrenTabType } from '@type/common';
 import { OptionType } from '@type/option';
-import { Divider } from 'primereact/divider';
-import { classNames } from 'primereact/utils';
 import { headerStyles } from '..';
+import classNames from 'classnames';
+import { Box, Divider } from '@chakra-ui/react';
 
 const InactiveTab = () => {
 	const parentActiveTab = useSelector((state) => state.searchBar.parentActive);
@@ -30,19 +30,24 @@ const InactiveTab = () => {
 	];
 
 	return (
-		<div
-			className={classNames(
-				'flex align-items-center border-rounded gap-3 px-4 border-1 border-200',
-				headerStyles['container'],
-			)}
-			style={{
-				boxShadow: 'var(--header-shadow)',
-			}}
+		<Box
+			display='flex'
+			alignItems='center'
+			borderRadius={9999}
+			gap={3}
+			px={4}
+			border='1px'
+			borderColor='gray.200'
+			shadow='header'
 		>
 			{tabs.map((tab) => (
-				<div
+				<Box
 					key={tab.code}
-					className={classNames('py-3 gap-3 flex align-items-center cursor-pointer', tab.className)}
+					py={3}
+					gap={3}
+					display='flex'
+					alignItems='center'
+					cursor='pointer'
 					onClick={() => {
 						dispatch(searchBarSlice.actions.setChildrenActive(tab.code));
 						dispatch(searchBarSlice.actions.setVisible(true));
@@ -53,13 +58,14 @@ const InactiveTab = () => {
 
 					{tab.divide && (
 						<Divider
-							className='py-1'
-							layout='vertical'
+							orientation='vertical'
+							height='18px'
+							borderColor='gray.300'
 						/>
 					)}
-				</div>
+				</Box>
 			))}
-		</div>
+		</Box>
 	);
 };
 

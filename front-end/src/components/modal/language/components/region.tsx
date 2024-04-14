@@ -4,7 +4,7 @@ import { Switch } from '@component/ui/switch';
 import { supportLanguage } from '@config/i18n';
 import { useGetList } from '@hook/use-get-list';
 import { useTranslation } from '@hook/use-translation';
-import { classNames } from 'primereact/utils';
+import classNames from 'classnames';
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useRouter } from '@hook/use-router';
@@ -74,7 +74,7 @@ const Region = () => {
 									scale: 1,
 								}}
 								whileHover={{
-									background: 'var(--surface-100)',
+									background: 'var(--chakra-colors-gray-100)',
 								}}
 								whileTap={{
 									scale: 0.95,

@@ -1,15 +1,15 @@
+import { Image as ChakraImage, ImageProps as ChakraImageProps } from '@chakra-ui/react';
 import { customApi } from '@config/api/custom-api';
 import { imageConfig } from '@config/image-config';
-import { Image as PrimeImage, ImageProps as PrimeImageProps } from 'primereact/image';
-import { classNames } from 'primereact/utils';
 
-type ImageProps = PrimeImageProps & {
+type ImageProps = ChakraImageProps & {
 	src: keyof typeof imageConfig;
 	placeholder?: string;
 };
 
 const Image = ({ src, ...props }: ImageProps) => {
 	const placeholder = props.placeholder || 'https://placehold.co/500';
+
 	const source = (() => {
 		let result = '';
 
@@ -29,12 +29,10 @@ const Image = ({ src, ...props }: ImageProps) => {
 	})();
 
 	return (
-		<PrimeImage
+		<ChakraImage
 			{...props}
-			alt={props.alt}
-			src={source || placeholder}
-			className='flex align-items-end justify-content-center'
-			imageClassName={classNames(props.imageClassName)}
+			src={source}
+			fallbackSrc={placeholder}
 		/>
 	);
 };

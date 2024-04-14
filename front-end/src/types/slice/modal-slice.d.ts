@@ -1,7 +1,7 @@
 import { modalConfig } from '@config/modal-config';
 
 type ModalSliceType = {
-	show?: boolean;
+	show: boolean;
 	active?: keyof typeof modalConfig;
 };
 

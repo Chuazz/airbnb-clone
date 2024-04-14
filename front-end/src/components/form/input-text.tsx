@@ -1,64 +1,41 @@
-import ErrorMessage from '@component/ui/error-message';
-import { ReactIcon } from '@component/ui/react-icon';
-import { InputText as PrimeInputText, InputTextProps as PrimeInputTextProps } from 'primereact/inputtext';
-import { classNames } from 'primereact/utils';
-import React from 'react';
+import {
+	FormControl,
+	FormControlProps,
+	FormErrorMessage,
+	FormErrorMessageProps,
+	FormHelperText,
+	FormHelperTextProps,
+	FormLabel,
+	FormLabelProps,
+	Input,
+	InputProps,
+} from '@chakra-ui/react';
 
 type InputTextProps = {
-	container?: React.HTMLAttributes<HTMLDivElement>;
-	label?: React.HtmlHTMLAttributes<HTMLLabelElement>;
-	input?: PrimeInputTextProps & {
+	control?: FormControlProps;
+	label?: FormLabelProps;
+	helperText?: FormHelperTextProps;
+	input?: InputProps & {
 		label?: string;
 		helpText?: string;
+		message?: string;
 		onChange?: (_value: string) => void;
 		onBlur?: (_value: string) => void;
 	};
-	errorMessage?: string;
+	error?: FormErrorMessageProps;
 };
 
 const InputText = (props: InputTextProps) => {
 	return (
-		<div {...props.container}>
-			{props.input?.label && (
-				<label
-					{...props.label}
-					htmlFor={props.input?.id}
-					className={classNames({ 'p-error': props?.errorMessage }, props.label?.className)}
-				>
-					{props.input?.label}
-				</label>
-			)}
+		<FormControl {...props.control}>
+			{props.input?.label && <FormLabel {...props.label}>{props.input?.label}</FormLabel>}
 
-			<PrimeInputText
-				className={classNames(
-					'border-round-3xl text-sm px-3 w-full',
-					{
-						'p-invalid': props?.errorMessage,
-					},
-					props.input?.className,
-				)}
-				onChange={(e) => props.input?.onChange?.(e.target.value)}
-				onBlur={(e) => props.input?.onChange?.(e.target.value)}
-				{...props.input}
-			/>
+			<Input {...props.input} />
 
-			{props.input?.helpText && (
-				<div className='flex align-items-center gap-1 mt-1'>
-					<ReactIcon
-						icon='io-ios-help-circle-outline'
-						size={16}
-						color='var(--surface-500)'
-					/>
-					<p className='text-xs flex-1 text-500'>{props.input?.helpText}</p>
-				</div>
-			)}
+			{props.input?.helpText && <FormHelperText {...props.helperText}>{props.input?.helpText}</FormHelperText>}
 
-			<ErrorMessage
-				message={props.errorMessage}
-				className='mt-1'
-				icon='lia-exclamation-circle-solid'
-			/>
-		</div>
+			{props.input?.message && <FormErrorMessage {...props.error}>{props.input.message}</FormErrorMessage>}
+		</FormControl>
 	);
 };
 

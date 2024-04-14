@@ -15,11 +15,10 @@ import { login } from '@root/src/libs/request';
 import { defaultLoginValues, getLoginSchema } from '@schema/auth';
 import { LoginType } from '@type/auth';
 import { PageType } from '@type/page';
-import { Button } from 'primereact/button';
-import { Divider } from 'primereact/divider';
 import { Controller, useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 import { ChangeLanguage } from './_components/change-language';
+import { AbsoluteCenter, Box, Button, Center, Divider, Flex, Spacer, Stack, Text, VStack } from '@chakra-ui/react';
 
 const LoginPage = ({ params: { lng } }: PageType) => {
 	const { t } = useTranslation(lng);
@@ -47,38 +46,70 @@ const LoginPage = ({ params: { lng } }: PageType) => {
 	};
 
 	return (
-		<div
-			className='border-round-3xl shadow-3 p-3 mx-auto flex max-w-full bg-white'
-			style={{ width: 900, minHeight: 600 }}
+		<Flex
+			borderRadius='3xl'
+			mx='auto'
+			maxWidth='100%'
+			backgroundColor='white'
+			width='900px'
+			overflow='hidden'
+			p={6}
 		>
 			<Loading show={isPending} />
 
-			<div className='flex-1 sm:p-4 lg:p-6 sm:pr-6 lg:pr-7 sm:pt-3 lg:pt-3 flex flex-column gap-5'>
-				<div className='flex align-items-center gap-2'>
+			<Flex
+				flexDirection='column'
+				flex={1}
+				p={6}
+				pr={12}
+				gap={5}
+			>
+				<Flex
+					alignItems='center'
+					gap={2}
+				>
 					<ReactIcon
 						icon='ai-fill-aliwangwang'
 						size={40}
 					/>
 
-					<p className='font-bold text-2xl flex-1'>{t('app:name')}</p>
+					<Text
+						fontWeight='bold'
+						fontSize='2xl'
+					>
+						{t('app:name')}
+					</Text>
 
 					<ChangeLanguage />
-				</div>
+				</Flex>
 
-				<div className='flex flex-column align-items-center gap-3 mt-4'>
+				<Flex
+					flexDirection='column'
+					alignItems='center'
+					gap={3}
+					mt={4}
+				>
 					<ReactIcon
 						icon='tb-door-enter'
 						size={40}
 						color='var(--surface-600)'
 					/>
 
-					<p className='text-xl font-bold'>{t('auth:welcome_back')}</p>
+					<Text
+						fontSize='xl'
+						fontWeight='semibold'
+					>
+						{t('auth:welcome_back')}
+					</Text>
 
 					<p className='text-500 text-sm font-semibold text-center'>{t('auth:login_to_continue')}</p>
-				</div>
+				</Flex>
 
 				<div>
-					<div className='w-full flex flex-column gap-3'>
+					<Flex
+						flexDirection='column'
+						gap={6}
+					>
 						<Controller
 							name='email'
 							control={control}
@@ -88,10 +119,9 @@ const LoginPage = ({ params: { lng } }: PageType) => {
 										id: field.name,
 										value: field.value,
 										placeholder: t('common:email'),
-										keyfilter: 'email',
 										onChange: field.onChange,
+										message: fieldState.error?.message,
 									}}
-									errorMessage={fieldState.error?.message}
 								/>
 							)}
 						/>
@@ -100,80 +130,73 @@ const LoginPage = ({ params: { lng } }: PageType) => {
 							name='password'
 							control={control}
 							render={({ field, fieldState }) => (
-								<InputPassword
+								<InputText
 									input={{
+										type: 'password',
 										value: field.value,
 										placeholder: t('auth:password'),
-										toggleMask: true,
-										feedback: false,
 										onChange: field.onChange,
+										message: fieldState.error?.message,
 									}}
-									errorMessage={fieldState.error?.message}
 								/>
 							)}
 						/>
 
 						<Link
 							href='reset-password'
-							className='text-sm text-400 text-right hover:text-primary hover:underline'
+							textAlign='right'
+							fontSize='sm'
+							color='gray.500'
+							_hover={{
+								textDecor: 'underline',
+							}}
 						>
 							{t('auth:forgot_password')}
 						</Link>
 
-						<Button
-							label={t('auth:login')}
-							size='small'
-							rounded={true}
-							className=' w-full'
-							onClick={handleSubmit(onSubmit)}
-						/>
-					</div>
+						<Button onClick={handleSubmit(onSubmit)}>{t('auth:login')}</Button>
+					</Flex>
 
-					<Divider
-						align='center'
-						className='my-5'
+					<Box
+						position='relative'
+						my={10}
 					>
-						<p className='text-sm text-600'>{t('common:or').toLowerCase()}</p>
-					</Divider>
+						<Divider />
 
-					<div className='flex align-items-center justify-content-center gap-2'>
+						<AbsoluteCenter bg='white'>
+							<p className='text-sm text-600'>{t('common:or').toLowerCase()}</p>
+						</AbsoluteCenter>
+					</Box>
+
+					<Center>
 						<Link
 							href='register'
-							className='text-500'
+							color='gray.500'
+							width='40px'
+							height='40px'
+							border='1px'
+							borderColor='gray.300'
+							borderRadius='full'
 						>
-							<Ripple
-								className='border-circle border-1 border-solid border-300 flex align-items-center justify-content-center'
-								style={{
-									width: 40,
-									height: 40,
-								}}
-							>
+							<Center height='100%'>
 								<ReactIcon
 									icon='tb-user-plus'
 									size={20}
 								/>
-							</Ripple>
+							</Center>
 						</Link>
-
-						{/* <Ripple className='border-circle border-1 border-solid border-300 w-2rem h-2rem flex align-items-center justify-content-center'>
-							<ReactIcon
-								icon='fc-google'
-								size={18}
-							/>
-						</Ripple> */}
-					</div>
+					</Center>
 				</div>
-			</div>
+			</Flex>
 
 			<Image
 				alt=''
 				src='auth-image'
-				width='350'
-				className='ngo van son'
-				imageClassName='border-round-3xl h-full'
-				imageStyle={{ objectFit: 'cover' }}
+				width={350}
+				objectFit='cover'
+				borderRadius='3xl'
 			/>
-		</div>
+		</Flex>
 	);
 };
 

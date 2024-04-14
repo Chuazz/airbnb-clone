@@ -1,5 +1,5 @@
 import ErrorMessage from '@component/ui/error-message';
-import { classNames } from 'primereact/utils';
+import classNames from 'classnames';
 import React from 'react';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import Editor from 'ckeditor5-custom-build';

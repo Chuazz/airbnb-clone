@@ -1,6 +1,6 @@
 'use client';
 
-import { classNames } from 'primereact/utils';
+import classNames from 'classnames';
 import styles from './loading.module.css';
 
 type LoadingProps = {

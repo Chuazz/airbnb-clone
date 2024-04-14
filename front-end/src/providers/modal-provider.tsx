@@ -1,9 +1,9 @@
+import { Modal, ModalContent, ModalOverlay } from '@chakra-ui/react';
 import { modalConfig } from '@config/modal-config';
 import { modalSlice } from '@redux/slices/modal-slice';
 import { useDispatch, useSelector } from '@redux/store';
 import { CustomDialogProps, ModalContextType, OpenModalType } from '@type/context/modal-context';
-import { Dialog } from 'primereact/dialog';
-import { classNames } from 'primereact/utils';
+import classNames from 'classnames';
 import { createContext, PropsWithChildren, useState } from 'react';
 
 const ModalContext = createContext<ModalContextType>({
@@ -13,7 +13,7 @@ const ModalContext = createContext<ModalContextType>({
 const ModalProvider = ({ children }: PropsWithChildren) => {
 	const { show, active } = useSelector((state) => state.modal);
 	const dispatch = useDispatch();
-	const DialogContent = active ? modalConfig[active] : () => <></>;
+	const ModalBody = active ? modalConfig[active] : () => <></>;
 	const [props, setProps] = useState<{ modalProps?: any; dialogProps?: CustomDialogProps }>();
 
 	const close = () => {
@@ -38,7 +38,35 @@ const ModalProvider = ({ children }: PropsWithChildren) => {
 		<ModalContext.Provider value={value}>
 			{children}
 
-			<Dialog
+			<Modal
+				isOpen={show}
+				onClose={() => {
+					dispatch(modalSlice.actions.close());
+				}}
+			>
+				<ModalOverlay />
+
+				<ModalContent>
+					<div
+						className={classNames(
+							'bg-white shadow-3 border-round-2xl overflow-hidden',
+							props?.dialogProps?.className,
+						)}
+						style={props?.dialogProps?.style}
+					>
+						<ModalBody
+							{...props?.modalProps}
+							onClose={() => {
+								props?.modalProps?.onClose?.();
+
+								close();
+							}}
+						/>
+					</div>
+				</ModalContent>
+			</Modal>
+
+			{/* <Dialog
 				{...props?.dialogProps}
 				visible={show}
 				className='shadow-none'
@@ -65,7 +93,7 @@ const ModalProvider = ({ children }: PropsWithChildren) => {
 
 					dispatch(modalSlice.actions.close());
 				}}
-			/>
+			/> */}
 		</ModalContext.Provider>
 	);
 };

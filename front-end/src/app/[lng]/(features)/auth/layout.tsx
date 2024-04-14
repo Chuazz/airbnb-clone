@@ -1,14 +1,17 @@
 import AuthImage from '@asset/images/img-auth.jpg';
+import { Flex } from '@chakra-ui/react';
 import { PageType } from '@type/page';
 
 const AuthLayout = async ({ params: { lng }, children }: PageType) => {
 	return (
-		<div
-			className='min-h-screen sm:p-4 md:p-6 flex align-items-center justify-content-center'
-			style={{ background: `url('${AuthImage.src}')` }}
+		<Flex
+			minHeight='100vh'
+			p={6}
+			alignItems='center'
+			background={`url('${AuthImage.src}')`}
 		>
 			{children}
-		</div>
+		</Flex>
 	);
 };
 

@@ -1,5 +1,5 @@
 import { iconConfig } from '@config/icon-config';
-import { classNames } from 'primereact/utils';
+import classNames from 'classnames';
 import { ReactIcon } from './react-icon';
 import { ComponentPropsWithoutRef } from 'react';
 

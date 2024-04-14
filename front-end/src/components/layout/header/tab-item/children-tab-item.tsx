@@ -3,10 +3,11 @@ import { useDispatch, useSelector } from '@redux/store';
 import { HeaderChildrenTabType } from '@type/common';
 import { OptionType } from '@type/option';
 import { motion } from 'framer-motion';
-import { classNames } from 'primereact/utils';
 import { PropsWithChildren } from 'react';
+import classNames from 'classnames';
 
 import styles from './tab-item.module.scss';
+import { Box, Text } from '@chakra-ui/react';
 
 const ChildrenTabItem = ({
 	tab,
@@ -20,20 +21,25 @@ const ChildrenTabItem = ({
 
 	return (
 		<div style={tab.styles}>
-			<motion.div
-				style={{
-					boxShadow: tab.code === childrenActiveTab ? 'var(--header-shadow)' : 'none',
-				}}
-				className={classNames(
-					'flex align-items-center justify-content-between cursor-pointer border-rounded relative py-3 border-1 border-left-none border-right-none border-transparent relative',
-					styles[`container-${searching}`],
-					styles['container'],
-					tab.className,
-					{
-						'bg-white border-200 z-1': tab.code === childrenActiveTab,
-						[styles['active']]: tab.code === childrenActiveTab,
-					},
-				)}
+			<Box
+				as={motion.div}
+				boxShadow={tab.code === childrenActiveTab ? 'header' : 'none'}
+				display='flex'
+				alignItems='center'
+				justifyContent='space-between'
+				cursor='pointer'
+				borderRadius={9999}
+				position='relative'
+				py={2}
+				border='1px'
+				borderLeft='none'
+				borderRight='none'
+				borderColor={tab.code === childrenActiveTab ? 'gray.200' : 'transparent'}
+				backgroundColor={tab.code === childrenActiveTab ? 'white' : 'transparent'}
+				zIndex={tab.code === childrenActiveTab ? 1 : 0}
+				className={classNames(styles[`container-${searching}`], styles['container'], tab.className, {
+					[styles['active']]: tab.code === childrenActiveTab,
+				})}
 				onClick={() => {
 					dispatch(searchBarSlice.actions.setChildrenActive(tab.code));
 					dispatch(searchBarSlice.actions.setSearching(true));
@@ -41,17 +47,30 @@ const ChildrenTabItem = ({
 					tab.action?.();
 				}}
 			>
-				<div className={classNames('px-4 flex flex-column gap-1 w-full', tab.className)}>
-					<p className='text-sm text-900 font-semibold'>{tab.label}</p>
-					<p className='text-600'>{tab.subLabel}</p>
-				</div>
+				<Box
+					px={5}
+					display='flex'
+					flexDirection='column'
+					width='100%'
+					className={tab.className}
+				>
+					<Text
+						fontSize='small'
+						fontWeight='500'
+						color='gray.800'
+					>
+						{tab.label}
+					</Text>
+
+					<Text color='gray.600'>{tab.subLabel}</Text>
+				</Box>
 
 				{children}
 
 				{tab.divide && (
 					<div className={classNames(styles[`container-border-${searching}`], styles['container-border'])} />
 				)}
-			</motion.div>
+			</Box>
 		</div>
 	);
 };

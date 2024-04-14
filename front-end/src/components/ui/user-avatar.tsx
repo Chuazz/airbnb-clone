@@ -2,10 +2,12 @@ import { useGetMyProfile } from '@hook/queries/use-get-my-profile';
 import { useCookies } from '@hook/use-cookies';
 import { Image } from './image';
 import { ReactIcon } from './react-icon';
+import { Box, Text } from '@chakra-ui/react';
 
 const UserAvatar = () => {
 	const { getCookie } = useCookies();
 	const isLogin = getCookie<boolean>('is_login');
+
 	const { data } = useGetMyProfile({
 		useQueryOption: {
 			enabled: !!isLogin,
@@ -18,17 +20,24 @@ const UserAvatar = () => {
 				alt=''
 				src='server'
 				id={data?.avatar}
-				width='31'
-				height='31'
-				imageClassName='border-circle object-cover'
+				width='31px'
+				height='31px'
+				borderRadius={9999}
+				objectFit='cover'
 			/>
 		) : (
-			<div
-				className='surface-900 border-circle cursor-auto flex align-items-center justify-content-center'
-				style={{ width: 30, height: 30 }}
+			<Box
+				background='gray.900'
+				borderRadius={9999}
+				cursor='auto'
+				display='flex'
+				alignItems='center'
+				justifyContent='center'
+				width='30px'
+				height='30px'
 			>
-				<p className='text-white'>{data?.last_name?.[0]?.toUpperCase()}</p>
-			</div>
+				<Text color='white'>{data?.last_name?.[0]?.toUpperCase()}</Text>
+			</Box>
 		)
 	) : (
 		<ReactIcon

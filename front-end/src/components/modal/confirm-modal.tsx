@@ -1,5 +1,5 @@
+import { Button } from '@chakra-ui/react';
 import { ConfirmModalType } from '@type/modal/confirm-modal';
-import { Button } from 'primereact/button';
 
 const ConfirmModal = ({ onClose, onAgree, onCancel }: ConfirmModalType) => {
 	return (
@@ -9,22 +9,23 @@ const ConfirmModal = ({ onClose, onAgree, onCancel }: ConfirmModalType) => {
 			<div className='flex gap-2'>
 				<Button
 					className='flex-1'
-					label='not now'
-					severity='secondary'
 					onClick={() => {
 						onClose?.();
 						onCancel?.();
 					}}
-				/>
+				>
+					not now
+				</Button>
 
 				<Button
 					className='flex-1'
-					label='very sure'
 					onClick={() => {
 						onClose?.();
 						onAgree?.();
 					}}
-				/>
+				>
+					very sure
+				</Button>
 			</div>
 		</div>
 	);

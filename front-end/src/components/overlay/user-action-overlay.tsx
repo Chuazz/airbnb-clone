@@ -1,19 +1,17 @@
+import { Box, Divider, VStack } from '@chakra-ui/react';
 import { useCookies } from '@hook/use-cookies';
-import { useTranslation } from '@hook/use-translation';
-import { OptionType } from '@type/option';
-import { Divider } from 'primereact/divider';
-import { classNames } from 'primereact/utils';
-import { motion } from 'framer-motion';
 import { useRouter } from '@hook/use-router';
+import { useTranslation } from '@hook/use-translation';
 import { logout } from '@lib/request';
-import { useOverlay } from '@hook/use-overlay';
+import { OptionType } from '@type/option';
+import classNames from 'classnames';
+import { motion } from 'framer-motion';
 
 const UserActionOverlay = () => {
 	const { getCookie } = useCookies();
 	const { t } = useTranslation();
 	const isLogin = getCookie<boolean>('is_login');
 	const router = useRouter();
-	const { close } = useOverlay();
 
 	const actions: OptionType[] = [
 		{
@@ -28,8 +26,6 @@ const UserActionOverlay = () => {
 			shouldShow: !isLogin,
 			divide: true,
 			action() {
-				close();
-
 				router.push('login');
 			},
 		},
@@ -99,9 +95,13 @@ const UserActionOverlay = () => {
 	];
 
 	return (
-		<div
-			className='flex flex-column py-2 overflow-auto'
-			style={{ width: 250, maxHeight: 'calc(100vh - 100px)' }}
+		<VStack
+			backgroundColor='white'
+			py={2}
+			overflow='auto'
+			width={250}
+			maxHeight='calc(100vh - 100px)'
+			align='stretch'
 		>
 			{actions.map(
 				(action) =>
@@ -110,23 +110,26 @@ const UserActionOverlay = () => {
 							key={action.code}
 							onClick={action.action}
 						>
-							<motion.div
-								className='px-3 py-3 cursor-pointer'
+							<Box
+								as={motion.div}
+								px={3}
+								py={3}
+								cursor='pointer'
 								initial={{
 									background: '#fff',
 								}}
 								whileHover={{
-									background: 'var(--surface-100)',
+									background: 'var(--chakra-colors-gray-100)',
 								}}
 							>
 								<p className={classNames(action.className)}>{action.label}</p>
-							</motion.div>
+							</Box>
 
-							{action.divide && <Divider className='my-2' />}
+							{action.divide && <Divider mt={3} />}
 						</div>
 					),
 			)}
-		</div>
+		</VStack>
 	);
 };
 

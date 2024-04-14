@@ -1,41 +1,29 @@
+import { Box, useEventListener } from '@chakra-ui/react';
 import { searchBarSlice } from '@redux/slices/search-bar-slice';
 import { useDispatch, useSelector } from '@redux/store';
-import { useEventListener } from 'primereact/hooks';
-import { useEffect } from 'react';
+import { motion } from 'framer-motion';
 import { ActiveTab } from './tab/active-tab';
 import { InactiveTab } from './tab/inactive-tab';
-import { motion } from 'framer-motion';
 
 const SearchBar = () => {
 	const visible = useSelector((state) => state.searchBar.visible);
 	const dispatch = useDispatch();
 
-	const [bindScroll, unbindScroll] = useEventListener({
-		type: 'scroll',
-		listener() {
-			if (window.scrollY > 0) {
-				dispatch(searchBarSlice.actions.setVisible(false));
-			} else {
-				dispatch(searchBarSlice.actions.setVisible(true));
-			}
-		},
+	useEventListener('scroll', () => {
+		if (window.scrollY > 0) {
+			dispatch(searchBarSlice.actions.setVisible(false));
+		} else {
+			dispatch(searchBarSlice.actions.setVisible(true));
+		}
 	});
-
-	useEffect(() => {
-		bindScroll();
-
-		return () => {
-			unbindScroll();
-		};
-	}, [bindScroll, unbindScroll]);
 
 	return (
 		<>
-			<motion.div
-				className='fixed left-50'
-				style={{
-					width: 850,
-				}}
+			<Box
+				as={motion.div}
+				position='fixed'
+				left='50%'
+				width={850}
 				initial={{
 					opacity: 1,
 					transform: 'translate(-50%, 0) scale(1)',
@@ -47,10 +35,12 @@ const SearchBar = () => {
 				}}
 			>
 				<ActiveTab />
-			</motion.div>
+			</Box>
 
-			<motion.div
-				className='fixed left-50'
+			<Box
+				as={motion.div}
+				position='fixed'
+				left='50%'
 				initial={{
 					opacity: 0,
 					transform: 'translate(-50%, -20px) scale(0.3)',
@@ -62,7 +52,7 @@ const SearchBar = () => {
 				}}
 			>
 				<InactiveTab />
-			</motion.div>
+			</Box>
 		</>
 	);
 };

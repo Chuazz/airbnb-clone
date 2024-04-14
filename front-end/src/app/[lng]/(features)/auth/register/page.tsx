@@ -1,5 +1,6 @@
 'use client';
 
+import { Button } from '@chakra-ui/react';
 import InputPassword from '@component/form/input-password';
 import InputText from '@component/form/input-text';
 import { Image } from '@component/ui/image';
@@ -12,7 +13,6 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { defaultRegisterValues, getRegisterSchema } from '@schema/auth';
 import { RegisterType } from '@type/auth';
 import { PageType } from '@type/page';
-import { Button } from 'primereact/button';
 import { Controller, useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 
@@ -155,12 +155,12 @@ const RegisterPage = ({ params: { lng } }: PageType) => {
 					/>
 
 					<Button
-						label={t('auth:create_account')}
 						size='small'
-						rounded={true}
 						className='w-full'
 						onClick={handleSubmit(onSubmit)}
-					/>
+					>
+						{t('auth:create_account')}
+					</Button>
 
 					{/* <Divider align='center'>
 						<p className='text-sm text-600'>{t('common:or').toLowerCase()}</p>

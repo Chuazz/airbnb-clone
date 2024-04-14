@@ -1,3 +1,4 @@
+import { Box } from '@chakra-ui/react';
 import { ReactIcon } from '@component/ui/react-icon';
 import { useModal } from '@hook/use-modal';
 
@@ -17,8 +18,17 @@ const ChangeLanguage = () => {
 	};
 
 	return (
-		<div
-			className='w-3rem h-3rem border-circle flex align-items-center justify-content-center cursor-pointer hover:surface-100'
+		<Box
+			width={10}
+			height={10}
+			borderRadius={9999}
+			display='flex'
+			alignItems='center'
+			justifyContent='center'
+			cursor='pointer'
+			_hover={{
+				background: 'gray.100',
+			}}
 			onClick={onLanguageClick}
 		>
 			<ReactIcon
@@ -26,7 +36,7 @@ const ChangeLanguage = () => {
 				size={20}
 				color='var(--surface-900)'
 			/>
-		</div>
+		</Box>
 	);
 };
 

@@ -1,11 +1,11 @@
+import { Input } from '@chakra-ui/react';
 import ErrorMessage from '@component/ui/error-message';
-import { Password, PasswordProps } from 'primereact/password';
-import { classNames } from 'primereact/utils';
+import classNames from 'classnames';
 import React from 'react';
 
 type InputPasswordProps = {
 	container?: React.HTMLAttributes<HTMLDivElement>;
-	input?: PasswordProps & {
+	input?: HTMLInputElement & {
 		label?: string;
 	};
 	errorMessage?: string;
@@ -23,10 +23,11 @@ const InputPassword = (props: InputPasswordProps) => {
 				</label>
 			)}
 
-			<Password
+			<Input
 				{...props.input}
+				type='password'
 				className={classNames('w-full', { 'p-invalid': props.errorMessage })}
-				inputClassName={classNames('border-round-3xl text-sm px-3 w-full', props.input?.inputClassName)}
+				inputClassName={classNames('border-round-3xl text-sm px-3 w-full', props.input?.cl)}
 			/>
 
 			<ErrorMessage

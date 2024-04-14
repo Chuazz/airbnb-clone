@@ -5,16 +5,14 @@ import {
 	useSelector as useReduxSelector,
 	type TypedUseSelectorHook,
 } from 'react-redux';
+import { appSlice } from './slices/app-slice';
 import { modalSlice } from './slices/modal-slice';
 import { searchBarSlice } from './slices/search-bar-slice';
-import { appSlice } from './slices/app-slice';
-import { overlaySlice } from './slices/overlay-slice';
 
 const reducer = {
 	modal: modalSlice.reducer,
 	searchBar: searchBarSlice.reducer,
 	app: appSlice.reducer,
-	overlay: overlaySlice.reducer,
 };
 
 export const reduxStore = configureStore({

@@ -1,20 +1,19 @@
-import { TextShadow } from '@component/ui/text-shadow';
+import { Box, Text, useOutsideClick } from '@chakra-ui/react';
+import { ReactIcon } from '@component/ui/react-icon';
 import { useTranslation } from '@hook/use-translation';
 import { searchBarSlice } from '@redux/slices/search-bar-slice';
 import { useDispatch, useSelector } from '@redux/store';
 import { HeaderChildrenTabType, HeaderParentTabType } from '@type/common';
 import { OptionType } from '@type/option';
+import classNames from 'classnames';
 import { motion } from 'framer-motion';
-import { useClickOutside } from 'primereact/hooks';
 import { useRef } from 'react';
 import { AddressTab } from '../tab-item/address-tab';
 import { CheckInTab } from '../tab-item/check-in-tab';
 import { CheckOutTab } from '../tab-item/check-out-tab';
 import { GuestTab } from '../tab-item/guest-tab';
-
 import itemStyles from '../tab-item/tab-item.module.scss';
-import { classNames } from 'primereact/utils';
-import { ReactIcon } from '@component/ui/react-icon';
+import { TextShadow } from '@component/ui/text-shadow';
 
 const ActiveTab = () => {
 	const { t } = useTranslation();
@@ -142,32 +141,48 @@ const ActiveTab = () => {
 			return itemStyles['hover-searching-left'];
 		}
 
+		if (tabs[index].code === childrenActiveTab) {
+			return itemStyles['hide-border'];
+		}
+
 		return '';
 	};
 
-	useClickOutside(tabRef, () => {
-		if (searching) {
-			dispatch(searchBarSlice.actions.setSearching(false));
-			dispatch(searchBarSlice.actions.setChildrenActive(undefined));
+	useOutsideClick({
+		ref: tabRef,
+		handler: () => {
+			if (searching) {
+				dispatch(searchBarSlice.actions.setSearching(false));
+				dispatch(searchBarSlice.actions.setChildrenActive(undefined));
 
-			if (window.scrollY > 0) {
-				dispatch(searchBarSlice.actions.setVisible(false));
+				if (window.scrollY > 0) {
+					dispatch(searchBarSlice.actions.setVisible(false));
+				}
 			}
-		}
+		},
 	});
 
 	return (
 		<div ref={tabRef}>
-			<div className='flex align-items-center justify-content-center gap-3 active-tab-container'>
+			<Box
+				display='flex'
+				alignItems='center'
+				justifyContent='center'
+				gap={3}
+			>
 				{tabs.map((tab) => (
-					<motion.div
+					<Box
+						as={motion.div}
 						key={tab.code}
-						className='cursor-pointer border-rounded px-4 py-3'
+						cursor='pointer'
+						borderRadius={99999}
+						px={3}
+						py={3}
 						initial={{
 							background: '#fff',
 						}}
 						whileHover={{
-							background: tab.code === parentActiveTab ? '#fff' : 'var(--surface-100)',
+							background: tab.code === parentActiveTab ? '#fff' : 'var(--chakra-colors-gray-100)',
 						}}
 						onClick={() => {
 							tab.action?.();
@@ -176,24 +191,26 @@ const ActiveTab = () => {
 						}}
 					>
 						<TextShadow
-							style={{
-								fontWeight: tab.code === parentActiveTab ? '600' : '400',
-								transition: 'all linear 0.1s',
-								color: tab.code === parentActiveTab ? 'var(--surface-900)' : 'var(--surface-500)',
-							}}
+							fontWeight={tab.code === parentActiveTab ? '600' : '400'}
+							transition='all linear 0.1s'
+							color={tab.code === parentActiveTab ? 'gray.900' : 'gray.500'}
 						>
 							{tab.label}
 						</TextShadow>
-					</motion.div>
+					</Box>
 				))}
-			</div>
+			</Box>
 
-			<div
-				style={{
-					boxShadow: 'var(--header-shadow)',
-					background: searching ? 'var(--ebebeb)' : 'transparent',
-				}}
-				className='border-rounded flex align-items-center mt-3 relative border-1 border-300'
+			<Box
+				boxShadow='header'
+				background={searching ? 'white.700' : 'transparent'}
+				borderRadius={99999}
+				display='flex'
+				alignItems='center'
+				mt={3}
+				position='relative'
+				border='1px'
+				borderColor='gray.200'
 			>
 				{childrenTabs
 					.filter((t) => t.shouldShow)
@@ -207,12 +224,21 @@ const ActiveTab = () => {
 							),
 					)}
 
-				<motion.div
-					className='z-2 vertical-center absolute right-0 gap-2 border-rounded flex align-items-center justify-content-center mr-2 overflow-hidden cursor-pointer'
-					style={{
-						background: searching ? 'var(--primary-gradient)' : 'var(--primary)',
-						height: '48px',
-					}}
+				<Box
+					as={motion.div}
+					zIndex={2}
+					position='absolute'
+					right={0}
+					gap={2}
+					borderRadius={9999}
+					display='flex'
+					alignItems='center'
+					justifyContent='center'
+					mr={2}
+					overflow='hidden'
+					cursor='pointer'
+					bgGradient='primary'
+					height='48px'
 					initial={{
 						width: '48px',
 					}}
@@ -226,9 +252,16 @@ const ActiveTab = () => {
 						size={20}
 					/>
 
-					{searching && <p className='text-white font-semibold'>Search</p>}
-				</motion.div>
-			</div>
+					{searching && (
+						<Text
+							color='white'
+							fontWeight='500'
+						>
+							Search
+						</Text>
+					)}
+				</Box>
+			</Box>
 		</div>
 	);
 };
