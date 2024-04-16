@@ -1,15 +1,17 @@
 import { ReactIcon } from '@component/ui/react-icon';
 import { useTranslation } from '@hook/use-translation';
-import { LanguageModalType } from '@type/modal/language-modal';
 import { OptionType } from '@type/option';
 import { motion } from 'framer-motion';
 import { useState } from 'react';
 import { Currency } from './components/currency';
 import { Region } from './components/region';
+import { useModal } from '@hook/use-modal';
+import { Box, Center, Flex, HStack, Text } from '@chakra-ui/react';
 
-const LanguageModal = ({ onClose }: LanguageModalType) => {
+const LanguageModal = () => {
 	const { t } = useTranslation();
 	const [active, setActive] = useState('region');
+	const { onClose } = useModal();
 
 	const tabs: OptionType[] = [
 		{
@@ -24,69 +26,77 @@ const LanguageModal = ({ onClose }: LanguageModalType) => {
 	];
 
 	return (
-		<div className='px-4 pb-4 relative'>
-			<div className='flex align-items-center h-4rem'>
-				<div
-					className='w-3rem h-3rem border-circle flex align-items-center justify-content-center cursor-pointer hover:surface-100'
-					onClick={onClose}
-					style={{
-						marginLeft: '-12px',
+		<Box
+			backgroundColor='white'
+			pl={6}
+			pb={6}
+		>
+			<Flex
+				height={14}
+				alignItems='center'
+			>
+				<Center
+					height={8}
+					width={8}
+					ml={-3}
+					borderRadius='full'
+					cursor='pointer'
+					_hover={{
+						backgroundColor: 'gray.100',
 					}}
+					onClick={onClose}
 				>
 					<ReactIcon
 						icon='ih-mini-x-mark'
-						size={20}
+						boxSize='20px'
 					/>
-				</div>
-			</div>
+				</Center>
+			</Flex>
 
-			<div
-				className='overflow-auto overflow-x-hidden flex flex-column gap-6'
-				style={{
-					maxHeight: 'calc(100vh - 190px)',
-				}}
+			<Flex
+				overflow='auto'
+				flexDirection='column'
+				gap={6}
+				pr={6}
+				maxHeight='calc(100vh - 190px)'
 			>
-				<div className='flex align-items-start gap-3 border-bottom-1 border-300'>
+				<HStack
+					borderBottom='1px'
+					borderColor='gray.200'
+					spacing={3}
+				>
 					{tabs.map((tab) => (
-						<div key={tab.code}>
-							<motion.div
-								className='cursor-pointer p-2 border-round mb-2 hover:surface-100'
-								whileTap={{
-									scale: 0.95,
+						<Box key={tab.code}>
+							<Box
+								p={2}
+								mb={1}
+								borderRadius='base'
+								cursor='pointer'
+								_hover={{
+									backgroundColor: 'gray.100',
 								}}
 								onClick={() => {
 									setActive(tab.code);
 								}}
 							>
-								<motion.p
-									className='font-semibold text-lg'
-									animate={{
-										color: tab.code === active ? 'var(--surface-900)' : 'var(--surface-500)',
-									}}
-								>
-									{tab.label}
-								</motion.p>
-							</motion.div>
+								<Text fontWeight='semibold'>{tab.label}</Text>
+							</Box>
 
-							<motion.div
-								className='border-bottom-3'
-								style={{
-									transformOrigin: '50% top',
-								}}
-								animate={{
-									opacity: tab.code === active ? 1 : 0,
-									scale: tab.code === active ? 1 : 0,
-								}}
+							<Box
+								as={motion.div}
+								height={0.5}
+								borderRadius='full'
+								backgroundColor={tab.code === active ? 'gray.700' : 'transparent'}
 							/>
-						</div>
+						</Box>
 					))}
-				</div>
+				</HStack>
 
 				{active === 'region' && <Region />}
 
 				{active === 'currency' && <Currency />}
-			</div>
-		</div>
+			</Flex>
+		</Box>
 	);
 };
 

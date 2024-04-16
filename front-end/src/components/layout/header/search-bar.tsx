@@ -22,6 +22,7 @@ const SearchBar = () => {
 			<Box
 				as={motion.div}
 				position='fixed'
+				zIndex='docked'
 				left='50%'
 				width={850}
 				initial={{
@@ -40,6 +41,8 @@ const SearchBar = () => {
 			<Box
 				as={motion.div}
 				position='fixed'
+				backgroundColor='white'
+				zIndex='docked'
 				left='50%'
 				initial={{
 					opacity: 0,

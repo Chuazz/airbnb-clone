@@ -28,7 +28,7 @@ const UserAction = () => {
 				<ReactIcon
 					icon='fa-bars'
 					color='var(--surface-900)'
-					size={16}
+					boxSize={4}
 				/>
 
 				<UserAvatar />

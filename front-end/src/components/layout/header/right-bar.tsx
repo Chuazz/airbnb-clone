@@ -1,4 +1,4 @@
-import { Box, Text } from '@chakra-ui/react';
+import { Box, Flex, Text } from '@chakra-ui/react';
 import { useTranslation } from '@hook/use-translation';
 import { ChangeLanguage } from './modal/change-language';
 import { UserAction } from './modal/user-action';
@@ -7,10 +7,10 @@ const RightBar = () => {
 	const { t } = useTranslation();
 
 	return (
-		<Box
-			display='flex'
+		<Flex
 			alignItems='center'
 			gap={2}
+			backgroundColor='white'
 		>
 			<Box
 				px={4}
@@ -35,7 +35,7 @@ const RightBar = () => {
 			<ChangeLanguage />
 
 			<UserAction />
-		</Box>
+		</Flex>
 	);
 };
 

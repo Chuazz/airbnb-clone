@@ -1,23 +1,20 @@
+import { Flex, Grid, Text, VStack } from '@chakra-ui/react';
 import { Loading } from '@component/ui/loading';
 import { ReactIcon } from '@component/ui/react-icon';
 import { Switch } from '@component/ui/switch';
 import { supportLanguage } from '@config/i18n';
 import { useGetList } from '@hook/use-get-list';
-import { useTranslation } from '@hook/use-translation';
-import classNames from 'classnames';
-import { useState } from 'react';
-import { motion } from 'framer-motion';
 import { useRouter } from '@hook/use-router';
+import { useTranslation } from '@hook/use-translation';
 import { useSelector } from '@redux/store';
-import { useModal } from '@hook/use-modal';
 import { LanguagesCollectionType } from '@type/collection/languages-collection';
+import { useState } from 'react';
 
 const Region = () => {
 	const { t, lng } = useTranslation();
 	const [value, setValue] = useState(false);
 	const currentPage = useSelector((state) => state.app.page);
 	const router = useRouter();
-	const { close } = useModal();
 
 	const languagesQuery = useGetList<LanguagesCollectionType>({
 		t,
@@ -32,76 +29,99 @@ const Region = () => {
 	});
 
 	return (
-		<div className='gap-6 flex flex-column'>
+		<Flex
+			gap={6}
+			flexDirection='column'
+		>
 			<Loading show={languagesQuery.isLoading} />
 
-			<div className='flex align-items-center w-fit gap-4 surface-100 border-round p-3'>
-				<div className='flex-1 flex flex-column gap-3'>
-					<div className='flex align-items-center gap-2'>
-						<p className='text-lg text-900'>{t('common:translation')}</p>
+			<Flex
+				backgroundColor='gray.50'
+				gap={4}
+				borderRadius='md'
+				alignItems='center'
+				width='fit-content'
+				p={4}
+			>
+				<VStack
+					align='start'
+					flex={1}
+				>
+					<Flex
+						alignItems='center'
+						gap={2}
+					>
+						<Text>{t('common:translation')}</Text>
 
 						<ReactIcon
 							icon='bs-translate'
-							size={20}
+							boxSize={5}
 						/>
-					</div>
+					</Flex>
 
-					<p>
+					<Text
+						color='gray.500'
+						fontSize='sm'
+					>
 						{t('common:auto_translate_description_reviews_to', {
 							language: supportLanguage[lng].translate,
 						})}
-					</p>
-				</div>
+					</Text>
+				</VStack>
 
 				<Switch
 					value={value}
 					onChange={() => setValue(!value)}
 				/>
-			</div>
+			</Flex>
 
-			<p className='text-2xl font-semibold text-900'>{t('common:choose_language_region')}</p>
+			<Text
+				fontWeight='semibold'
+				fontSize='xl'
+			>
+				{t('common:choose_language_region')}
+			</Text>
 
 			{languagesQuery.data && (
-				<div className='grid align-items-center'>
+				<Grid
+					templateColumns='repeat(5, 1fr)'
+					gap={4}
+				>
 					{languagesQuery.data.map((language) => (
-						<div
+						<VStack
 							key={language.id}
-							className='mx-2 col-2-5'
+							border='1px'
+							borderColor={language.code === lng ? 'gray.800' : 'transparent'}
+							px={3}
+							py={2}
+							borderRadius='lg'
+							cursor='pointer'
+							spacing={0}
+							align='flex-start'
+							_hover={{
+								backgroundColor: 'var(--chakra-colors-gray-50)',
+							}}
+							onClick={() => {
+								close();
+
+								if (language.code !== lng) {
+									router.push(currentPage, language.code);
+								}
+							}}
 						>
-							<motion.div
-								initial={{
-									background: '#fff',
-									scale: 1,
-								}}
-								whileHover={{
-									background: 'var(--chakra-colors-gray-100)',
-								}}
-								whileTap={{
-									scale: 0.95,
-								}}
-								className={classNames(
-									'px-3 py-2 border-round border-500 flex flex-column gap-2 cursor-pointer',
-									{
-										'border-1': language.code === lng,
-									},
-								)}
-								onClick={() => {
-									close();
+							<Text>{language.sample}</Text>
 
-									if (language.code !== lng) {
-										router.push(currentPage, language.code);
-									}
-								}}
+							<Text
+								fontSize='sm'
+								color='gray.500'
 							>
-								<p className='text-900'>{language.sample}</p>
-
-								<p>{language.name}</p>
-							</motion.div>
-						</div>
+								{language.name}
+							</Text>
+						</VStack>
 					))}
-				</div>
+				</Grid>
 			)}
-		</div>
+		</Flex>
 	);
 };
 

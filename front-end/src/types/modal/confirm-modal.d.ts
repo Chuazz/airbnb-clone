@@ -1,6 +1,4 @@
-import { ModalType } from './modal';
-
-type ConfirmModalType = ModalType & {
+type ConfirmModalType = {
 	onAgree?: () => void;
 	onCancel?: () => void;
 };

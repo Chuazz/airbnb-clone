@@ -1,5 +1,3 @@
-import { ModalType } from './modal';
-
-type LanguageModalType = ModalType & {};
+type LanguageModalType = {};
 
 export type { LanguageModalType };

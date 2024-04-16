@@ -1,3 +1,4 @@
+import { Flex, Grid, Text, VStack } from '@chakra-ui/react';
 import { Loading } from '@component/ui/loading';
 import { useGetList } from '@hook/use-get-list';
 import { useModal } from '@hook/use-modal';
@@ -5,8 +6,6 @@ import { useRouter } from '@hook/use-router';
 import { useTranslation } from '@hook/use-translation';
 import { useSelector } from '@redux/store';
 import { CurrenciesCollectionType } from '@type/collection/currencies-collection';
-import { motion } from 'framer-motion';
-import classNames from 'classnames';
 
 const Currency = () => {
 	const { t, lng } = useTranslation();
@@ -27,52 +26,59 @@ const Currency = () => {
 	});
 
 	return (
-		<div className='gap-6 flex flex-column'>
+		<Flex
+			flexDirection='column'
+			gap={6}
+		>
 			<Loading show={currenciesQuery.isLoading} />
 
-			<p className='text-2xl font-semibold text-900'>{t('common:choose_currency')}</p>
+			<Text
+				fontWeight='semibold'
+				fontSize='xl'
+			>
+				{t('common:choose_currency')}
+			</Text>
 
 			{currenciesQuery.data && (
-				<div className='grid align-items-center'>
+				<Grid
+					templateColumns='repeat(5, 1fr)'
+					gap={4}
+				>
 					{currenciesQuery.data.map((currency) => (
-						<div
+						<VStack
 							key={currency.id}
-							className='mx-2 col-2-5'
+							border='1px'
+							borderColor={currency.code === lng ? 'gray.800' : 'transparent'}
+							px={3}
+							py={2}
+							borderRadius='lg'
+							cursor='pointer'
+							spacing={0}
+							align='flex-start'
+							_hover={{
+								backgroundColor: 'var(--chakra-colors-gray-50)',
+							}}
+							onClick={() => {
+								close();
+
+								if (currency.code !== lng) {
+									router.push(currentPage, currency.code);
+								}
+							}}
 						>
-							<motion.div
-								initial={{
-									background: '#fff',
-									scale: 1,
-								}}
-								whileHover={{
-									background: 'var(--chakra-colors-gray-100)',
-								}}
-								whileTap={{
-									scale: 0.95,
-								}}
-								className={classNames(
-									'px-3 py-2 border-round border-500 flex flex-column gap-2 cursor-pointer',
-									{
-										'border-1': currency.code === lng,
-									},
-								)}
-								onClick={() => {
-									close();
+							<Text>{currency.name}</Text>
 
-									if (currency.code !== lng) {
-										router.push(currentPage, currency.code);
-									}
-								}}
+							<Text
+								fontSize='sm'
+								color='gray.500'
 							>
-								<p className='text-900'>{currency.name}</p>
-
-								<p>{currency.symbol}</p>
-							</motion.div>
-						</div>
+								{currency.symbol}
+							</Text>
+						</VStack>
 					))}
-				</div>
+				</Grid>
 			)}
-		</div>
+		</Flex>
 	);
 };
 

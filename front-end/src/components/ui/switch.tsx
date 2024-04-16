@@ -1,3 +1,4 @@
+import { Flex } from '@chakra-ui/react';
 import { SwitchType } from '@type/ui/switch-ui';
 import { motion } from 'framer-motion';
 import { ReactIcon } from './react-icon';
@@ -7,21 +8,30 @@ const Switch = ({ width = 50, value, onChange }: SwitchType) => {
 	const iconContainerSize = height - 3;
 
 	return (
-		<motion.div
-			className='border-rounded cursor-pointer flex align-items-center'
-			style={{ width, height }}
+		<Flex
+			as={motion.div}
+			borderRadius='full'
+			cursor='pointer'
+			alignItems='center'
+			width={width}
+			height={height}
 			initial={{
-				backgroundColor: 'var(--surface-300)',
+				backgroundColor: 'var(--chakra-colors-gray-300)',
 			}}
 			animate={{
-				backgroundColor: value ? 'var(--surface-900)' : 'var(--surface-300)',
+				backgroundColor: value ? 'var(--chakra-colors-gray-900)' : 'var(--chakra-colors-gray-300)',
 			}}
 			onClick={onChange}
 		>
-			<motion.div
-				className='flex align-items-center justify-content-center bg-white border-circle'
-				style={{ width: iconContainerSize, height: iconContainerSize }}
-				transition={{ type: 'tween' }}
+			<Flex
+				as={motion.div}
+				alignItems='center'
+				justifyContent='center'
+				backgroundColor='white'
+				borderRadius='full'
+				width={iconContainerSize}
+				height={iconContainerSize}
+				transition='all 0.1s linear'
 				initial={{
 					translateX: 2,
 				}}
@@ -32,11 +42,11 @@ const Switch = ({ width = 50, value, onChange }: SwitchType) => {
 				{value && (
 					<ReactIcon
 						icon='io-checkmark'
-						size={Math.ceil(height / 2)}
+						boxSize={`${Math.ceil(height / 2)}px`}
 					/>
 				)}
-			</motion.div>
-		</motion.div>
+			</Flex>
+		</Flex>
 	);
 };
 

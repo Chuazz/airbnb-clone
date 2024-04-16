@@ -6,11 +6,9 @@ import {
 	type TypedUseSelectorHook,
 } from 'react-redux';
 import { appSlice } from './slices/app-slice';
-import { modalSlice } from './slices/modal-slice';
 import { searchBarSlice } from './slices/search-bar-slice';
 
 const reducer = {
-	modal: modalSlice.reducer,
 	searchBar: searchBarSlice.reducer,
 	app: appSlice.reducer,
 };

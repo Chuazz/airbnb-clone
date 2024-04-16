@@ -2,6 +2,7 @@
 
 import classNames from 'classnames';
 import styles from './loading.module.css';
+import { Box } from '@chakra-ui/react';
 
 type LoadingProps = {
 	show?: boolean;
@@ -12,7 +13,15 @@ type LoadingProps = {
 const Loading = ({ size = 64, show = true, lineSize = 5 }: LoadingProps) => {
 	return (
 		show && (
-			<div className='bg-black-alpha-70 absolute top-0 left-0 right-0 bottom-0 z-5'>
+			<Box
+				backgroundColor='blackAlpha.500'
+				position='absolute'
+				top={0}
+				left={0}
+				right={0}
+				bottom={0}
+				zIndex={9999}
+			>
 				<div
 					className={classNames(styles.loader)}
 					style={{ width: size, height: size }}
@@ -30,7 +39,7 @@ const Loading = ({ size = 64, show = true, lineSize = 5 }: LoadingProps) => {
 						style={{ borderTop: `${lineSize}px solid #efeffa` }}
 					/>
 				</div>
-			</div>
+			</Box>
 		)
 	);
 };

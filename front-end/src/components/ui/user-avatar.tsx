@@ -42,7 +42,7 @@ const UserAvatar = () => {
 	) : (
 		<ReactIcon
 			icon='fa-user-circle'
-			size={30}
+			boxSize='30px'
 		/>
 	);
 };

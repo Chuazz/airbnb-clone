@@ -2,17 +2,16 @@
 
 import '@asset/styles/global.scss';
 import { ChakraUIProviders } from '@provider/chakra-ui-provider';
-import { ModalProvider } from '@provider/modal-provider';
 import { useSelector } from '@redux/store';
 import { QueryCache, QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { PageType } from '@type/page';
 import { dir } from 'i18next';
+import { Inter } from 'next/font/google';
 import { Bounce, toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import 'slick-carousel/slick/slick-theme.css';
 import 'slick-carousel/slick/slick.css';
-import { Inter } from 'next/font/google';
 
 const inter = Inter({
 	subsets: ['latin'],
@@ -28,27 +27,19 @@ const queryClient = new QueryClient({
 });
 
 const AppLayout = ({ children, params: { lng } }: PageType) => {
-	const show = useSelector((state) => state.modal.show);
-
 	return (
 		<html
 			lang={lng}
 			dir={dir(lng)}
-			className={inter.variable}
+			className={inter.className}
 		>
 			<head></head>
 
-			<body
-				style={{
-					overflow: show ? 'hidden' : 'auto',
-				}}
-			>
+			<body>
 				<QueryClientProvider client={queryClient}>
 					<ReactQueryDevtools initialIsOpen={false} />
 
-					<ModalProvider>
-						<ChakraUIProviders>{children}</ChakraUIProviders>
-					</ModalProvider>
+					<ChakraUIProviders>{children}</ChakraUIProviders>
 				</QueryClientProvider>
 
 				<ToastContainer

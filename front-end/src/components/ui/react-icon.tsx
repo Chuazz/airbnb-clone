@@ -1,14 +1,17 @@
+import { Icon, IconProps } from '@chakra-ui/react';
 import { iconConfig } from '@config/icon-config';
-import { IconBaseProps } from 'react-icons/lib';
 
-type ReactIconProps = IconBaseProps & {
+type ReactIconProps = IconProps & {
 	icon: keyof typeof iconConfig;
 };
 
 const ReactIcon = ({ icon, ...props }: ReactIconProps) => {
-	const Icon = iconConfig[icon];
-
-	return <Icon {...props} />;
+	return (
+		<Icon
+			as={iconConfig[icon]}
+			{...props}
+		/>
+	);
 };
 
 export { ReactIcon };
