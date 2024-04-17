@@ -1,6 +1,6 @@
 import { Box } from '@chakra-ui/react';
 import { Overlay } from '@component/overlay';
-import { UserActionOverlay } from '@component/overlay/user-action-overlay';
+import { UserActionOverlay } from '@component/layout/header/overlay/user-action-overlay';
 import { ReactIcon } from '@component/ui/react-icon';
 import { UserAvatar } from '@component/ui/user-avatar';
 
@@ -8,7 +8,9 @@ const UserAction = () => {
 	return (
 		<Overlay
 			content={<UserActionOverlay />}
-			placement='bottom-end'
+			popoverProps={{
+				placement: 'bottom-end',
+			}}
 		>
 			<Box
 				display='flex'

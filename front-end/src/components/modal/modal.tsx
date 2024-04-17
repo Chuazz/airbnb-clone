@@ -24,7 +24,12 @@ const Modal = ({ children, content, ...props }: ModalType) => {
 			>
 				<ModalOverlay />
 
-				<ModalContent overflow='hidden'>{content}</ModalContent>
+				<ModalContent
+					backgroundColor='transparent'
+					border='none'
+				>
+					{content}
+				</ModalContent>
 			</ChakraModal>
 		</ModalContext.Provider>
 	);

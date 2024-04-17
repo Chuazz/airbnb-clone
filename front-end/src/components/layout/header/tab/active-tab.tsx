@@ -40,93 +40,26 @@ const ActiveTab = () => {
 		},
 	];
 
-	const childrenTabs: OptionType<HeaderChildrenTabType, { className?: string; divide?: boolean }>[] = [
+	const childrenTabs: OptionType<HeaderChildrenTabType>[] = [
 		{
 			code: 'where',
 			shouldShow: ['stays', 'experiences'].includes(parentActiveTab),
-			component: (data) => (
-				<AddressTab
-					code='where'
-					label='Where'
-					subLabel='Search destinations'
-					divide={true}
-					styles={{
-						flexBasis: parentActiveTab === 'stays' ? '30%' : '40%',
-						paddingRight: '0.25rem',
-					}}
-					className={classNames(itemStyles['hover-right'], data.className)}
-				/>
-			),
 		},
 		{
 			code: 'check_in',
 			shouldShow: ['stays'].includes(parentActiveTab),
-			component: (data) => (
-				<CheckInTab
-					code='check_in'
-					label='Check in'
-					subLabel='Add dates'
-					divide={true}
-					styles={{
-						flexBasis: '20%',
-						paddingLeft: '0.25rem',
-						paddingRight: '0.25rem',
-					}}
-					className={classNames(itemStyles['hover-both'], data.className)}
-				/>
-			),
 		},
 		{
 			code: 'check_out',
 			shouldShow: ['stays'].includes(parentActiveTab),
-			component: (data) => (
-				<CheckOutTab
-					code='check_out'
-					label='Check out'
-					subLabel='Add dates'
-					divide={true}
-					styles={{
-						flexBasis: '20%',
-						paddingLeft: '0.25rem',
-						paddingRight: '0.25rem',
-					}}
-					className={classNames(itemStyles['hover-both'], data.className)}
-				/>
-			),
 		},
 		{
 			code: 'date',
 			shouldShow: ['experiences'].includes(parentActiveTab),
-			component: (data) => (
-				<CheckOutTab
-					code='date'
-					label='Date'
-					subLabel='Add dates'
-					divide={true}
-					styles={{
-						flexBasis: '40%',
-						paddingLeft: '0.25rem',
-						paddingRight: '0.25rem',
-					}}
-					className={classNames(itemStyles['hover-both'], data.className)}
-				/>
-			),
 		},
 		{
 			code: 'who',
 			shouldShow: ['stays', 'experiences'].includes(parentActiveTab),
-			component: (data) => (
-				<GuestTab
-					code='who'
-					label='Who'
-					subLabel='Add guests'
-					styles={{
-						flexBasis: parentActiveTab === 'stays' ? '30%' : '40%',
-						paddingLeft: '0.25rem',
-					}}
-					className={classNames(itemStyles['hover-left'], data.className)}
-				/>
-			),
 		},
 	];
 
@@ -175,7 +108,7 @@ const ActiveTab = () => {
 						as={motion.div}
 						key={tab.code}
 						cursor='pointer'
-						borderRadius={99999}
+						borderRadius='full'
 						px={3}
 						py={3}
 						initial={{
@@ -212,17 +145,73 @@ const ActiveTab = () => {
 				border='1px'
 				borderColor='gray.200'
 			>
-				{childrenTabs
-					.filter((t) => t.shouldShow)
-					.map(
-						(tab, index) =>
-							tab.component && (
-								<tab.component
-									key={tab.code}
-									className={handleClassName(index)}
-								/>
-							),
-					)}
+				<AddressTab
+					code='where'
+					label='Where'
+					subLabel='Search destinations'
+					divide={true}
+					styles={{
+						flexBasis: parentActiveTab === 'stays' ? '30%' : '40%',
+						paddingRight: '0.25rem',
+					}}
+					className={classNames(itemStyles['hover-right'], handleClassName(0))}
+				/>
+
+				{['stays'].includes(parentActiveTab) && (
+					<CheckInTab
+						code='check_in'
+						label='Check in'
+						subLabel='Add dates'
+						divide={true}
+						styles={{
+							flexBasis: '20%',
+							paddingLeft: '0.25rem',
+							paddingRight: '0.25rem',
+						}}
+						className={classNames(itemStyles['hover-both'], handleClassName(1))}
+					/>
+				)}
+
+				{['stays'].includes(parentActiveTab) && (
+					<CheckOutTab
+						code='check_out'
+						label='Check out'
+						subLabel='Add dates'
+						divide={true}
+						styles={{
+							flexBasis: '20%',
+							paddingLeft: '0.25rem',
+							paddingRight: '0.25rem',
+						}}
+						className={classNames(itemStyles['hover-both'], handleClassName(2))}
+					/>
+				)}
+
+				{['experiences'].includes(parentActiveTab) && (
+					<CheckOutTab
+						code='date'
+						label='Date'
+						subLabel='Add dates'
+						divide={true}
+						styles={{
+							flexBasis: '40%',
+							paddingLeft: '0.25rem',
+							paddingRight: '0.25rem',
+						}}
+						className={classNames(itemStyles['hover-both'], handleClassName(1))}
+					/>
+				)}
+
+				<GuestTab
+					code='who'
+					label='Who'
+					subLabel='Add guests'
+					styles={{
+						flexBasis: parentActiveTab === 'stays' ? '30%' : '40%',
+						paddingLeft: '0.25rem',
+					}}
+					className={classNames(itemStyles['hover-left'], handleClassName(parentActiveTab === 'stays' ? 3 : 2))}
+				/>
 
 				<Box
 					as={motion.div}
@@ -249,7 +238,7 @@ const ActiveTab = () => {
 					<ReactIcon
 						icon='hi-mini-magnifying-glass'
 						color='white'
-						size={20}
+						boxSize='20px'
 					/>
 
 					{searching && (

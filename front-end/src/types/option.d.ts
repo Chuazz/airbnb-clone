@@ -1,6 +1,7 @@
+import { BoxProps } from '@chakra-ui/react';
 import { CSSProperties, ReactNode } from 'react';
 
-type OptionType<CodeType = string, ComponentType = any> = {
+type OptionType<CodeType = string> = {
 	code: CodeType;
 	label?: string;
 	subLabel?: string;
@@ -8,10 +9,10 @@ type OptionType<CodeType = string, ComponentType = any> = {
 	disable?: boolean;
 	badge?: number;
 	showBadge?: boolean;
-	className?: string;
-	component?: (_props: ComponentType) => JSX.Element;
 	icon?: ReactNode;
+	className?: string;
 	styles?: CSSProperties;
+	boxProps?: BoxProps;
 	divide?: boolean;
 	action?: () => void;
 };

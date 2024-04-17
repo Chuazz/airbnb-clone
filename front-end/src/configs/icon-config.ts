@@ -1,16 +1,16 @@
-import { FcGoogle } from 'react-icons/fc';
-import { FiPhone } from 'react-icons/fi';
-import { TbDoorEnter, TbFingerprintScan, TbUserPlus } from 'react-icons/tb';
+import { AiFillAliwangwang } from 'react-icons/ai';
+import { BsEnvelopeArrowUpFill, BsTranslate } from 'react-icons/bs';
 import { FaFingerprint, FaUserCircle } from 'react-icons/fa';
 import { FaBars } from 'react-icons/fa6';
-import { AiFillAliwangwang } from 'react-icons/ai';
-import { TbDoorExit } from 'react-icons/tb';
-import { BsEnvelopeArrowUpFill, BsTranslate } from 'react-icons/bs';
-import { LiaExclamationCircleSolid } from 'react-icons/lia';
-import { IoIosHelpCircleOutline } from 'react-icons/io';
-import { RiGlobalLine } from 'react-icons/ri';
+import { FcGoogle } from 'react-icons/fc';
+import { FiPhone } from 'react-icons/fi';
+import { HiOutlineMinus, HiOutlinePlus } from 'react-icons/hi';
 import { HiMiniMagnifyingGlass, HiMiniXMark } from 'react-icons/hi2';
+import { IoIosHelpCircleOutline } from 'react-icons/io';
 import { IoCheckmark } from 'react-icons/io5';
+import { LiaExclamationCircleSolid } from 'react-icons/lia';
+import { RiGlobalLine } from 'react-icons/ri';
+import { TbDoorEnter, TbDoorExit, TbFingerprintScan, TbUserPlus } from 'react-icons/tb';
 
 const iconConfig = {
 	'fi-phone': FiPhone,
@@ -31,6 +31,8 @@ const iconConfig = {
 	'fa-user-circle': FaUserCircle,
 	'fa-bars': FaBars,
 	'hi-mini-magnifying-glass': HiMiniMagnifyingGlass,
+	'hi-outline-minus': HiOutlineMinus,
+	'hi-outline-plus': HiOutlinePlus,
 };
 
 export { iconConfig };

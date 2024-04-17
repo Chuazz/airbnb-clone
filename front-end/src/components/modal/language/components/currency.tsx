@@ -11,7 +11,7 @@ const Currency = () => {
 	const { t, lng } = useTranslation();
 	const currentPage = useSelector((state) => state.app.page);
 	const router = useRouter();
-	const { close } = useModal();
+	const { onClose } = useModal();
 
 	const currenciesQuery = useGetList<CurrenciesCollectionType>({
 		t,
@@ -59,7 +59,7 @@ const Currency = () => {
 								backgroundColor: 'var(--chakra-colors-gray-50)',
 							}}
 							onClick={() => {
-								close();
+								onClose();
 
 								if (currency.code !== lng) {
 									router.push(currentPage, currency.code);

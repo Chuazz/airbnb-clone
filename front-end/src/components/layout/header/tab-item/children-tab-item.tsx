@@ -1,30 +1,30 @@
+import { Flex, Text, VStack } from '@chakra-ui/react';
 import { searchBarSlice } from '@redux/slices/search-bar-slice';
 import { useDispatch, useSelector } from '@redux/store';
 import { HeaderChildrenTabType } from '@type/common';
 import { OptionType } from '@type/option';
-import { motion } from 'framer-motion';
-import { PropsWithChildren } from 'react';
 import classNames from 'classnames';
-
+import { motion } from 'framer-motion';
+import { ComponentPropsWithRef, forwardRef } from 'react';
 import styles from './tab-item.module.scss';
-import { Box, Text } from '@chakra-ui/react';
 
-const ChildrenTabItem = ({
-	tab,
-	children,
-}: {
-	tab: OptionType<HeaderChildrenTabType>;
-} & PropsWithChildren) => {
+const ChildrenTabItem = forwardRef<
+	HTMLDivElement,
+	{ tab: OptionType<HeaderChildrenTabType> } & ComponentPropsWithRef<'div'>
+>(({ tab, ...prop }, ref) => {
 	const searching = useSelector((state) => state.searchBar.searching);
 	const childrenActiveTab = useSelector((state) => state.searchBar.childrenActive);
 	const dispatch = useDispatch();
 
 	return (
-		<div style={tab.styles}>
-			<Box
+		<div
+			ref={ref}
+			style={tab.styles}
+			{...prop}
+		>
+			<Flex
 				as={motion.div}
 				boxShadow={tab.code === childrenActiveTab ? 'header' : 'none'}
-				display='flex'
 				alignItems='center'
 				justifyContent='space-between'
 				cursor='pointer'
@@ -47,11 +47,10 @@ const ChildrenTabItem = ({
 					tab.action?.();
 				}}
 			>
-				<Box
+				<VStack
 					px={5}
-					display='flex'
-					flexDirection='column'
-					width='100%'
+					spacing={0}
+					align='flex-start'
 					className={tab.className}
 				>
 					<Text
@@ -63,16 +62,16 @@ const ChildrenTabItem = ({
 					</Text>
 
 					<Text color='gray.600'>{tab.subLabel}</Text>
-				</Box>
-
-				{children}
+				</VStack>
 
 				{tab.divide && (
 					<div className={classNames(styles[`container-border-${searching}`], styles['container-border'])} />
 				)}
-			</Box>
+			</Flex>
 		</div>
 	);
-};
+});
+
+ChildrenTabItem.displayName = 'ChildrenTabItem';
 
 export { ChildrenTabItem };

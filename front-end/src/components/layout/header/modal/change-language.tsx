@@ -10,6 +10,7 @@ const ChangeLanguage = () => {
 			scrollBehavior='inside'
 			content={<LanguageModal />}
 			size='6xl'
+			motionPreset='slideInBottom'
 		>
 			<Box
 				width={10}

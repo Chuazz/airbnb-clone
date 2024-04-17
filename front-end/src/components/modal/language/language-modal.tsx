@@ -30,6 +30,7 @@ const LanguageModal = () => {
 			backgroundColor='white'
 			pl={6}
 			pb={6}
+			borderRadius='xl'
 		>
 			<Flex
 				height={14}

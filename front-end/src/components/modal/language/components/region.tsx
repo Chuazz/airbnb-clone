@@ -4,6 +4,7 @@ import { ReactIcon } from '@component/ui/react-icon';
 import { Switch } from '@component/ui/switch';
 import { supportLanguage } from '@config/i18n';
 import { useGetList } from '@hook/use-get-list';
+import { useModal } from '@hook/use-modal';
 import { useRouter } from '@hook/use-router';
 import { useTranslation } from '@hook/use-translation';
 import { useSelector } from '@redux/store';
@@ -15,6 +16,7 @@ const Region = () => {
 	const [value, setValue] = useState(false);
 	const currentPage = useSelector((state) => state.app.page);
 	const router = useRouter();
+	const { onClose } = useModal();
 
 	const languagesQuery = useGetList<LanguagesCollectionType>({
 		t,
@@ -102,7 +104,7 @@ const Region = () => {
 								backgroundColor: 'var(--chakra-colors-gray-50)',
 							}}
 							onClick={() => {
-								close();
+								onClose();
 
 								if (language.code !== lng) {
 									router.push(currentPage, language.code);

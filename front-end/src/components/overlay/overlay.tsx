@@ -1,4 +1,4 @@
-import { Popover, PopoverContent, PopoverTrigger, useDisclosure } from '@chakra-ui/react';
+import { Button, Popover, PopoverContent, PopoverTrigger, useDisclosure } from '@chakra-ui/react';
 import { OverlayContextType } from '@type/context/overlay-context';
 import { OverlayType } from '@type/overlay/overlay';
 import { createContext } from 'react';
@@ -11,29 +11,47 @@ const OverlayContext = createContext<OverlayContextType>({
 });
 
 const Overlay = ({ children, content, ...props }: OverlayType) => {
-	const { isOpen, onToggle, onClose, onOpen } = useDisclosure();
+	const { onClose, onOpen, onToggle, isOpen } = useDisclosure();
 
 	return (
-		<OverlayContext.Provider value={{ isOpen, onToggle, onClose, onOpen }}>
-			<Popover
-				{...props}
-				isOpen={isOpen}
-				onClose={onClose}
-				onOpen={onOpen}
-				isLazy={true}
-			>
-				<PopoverTrigger>
-					<button onClick={onToggle}>{children}</button>
-				</PopoverTrigger>
-
-				<PopoverContent
-					width='fit-content'
-					overflow='hidden'
+		<>
+			<OverlayContext.Provider value={{ onClose, onOpen, onToggle, isOpen }}>
+				<Popover
+					isOpen={isOpen}
+					onClose={onClose}
+					onOpen={onOpen}
+					isLazy={true}
+					{...props.popoverProps}
 				>
-					{content}
-				</PopoverContent>
-			</Popover>
-		</OverlayContext.Provider>
+					<PopoverTrigger>
+						<Button
+							lineHeight='unset'
+							height='auto'
+							display='block'
+							fontWeight='normal'
+							padding={0}
+							backgroundColor='transparent'
+							_hover={{
+								backgroundColor: 'transparent',
+							}}
+							{...props.buttonProps}
+						>
+							{children}
+						</Button>
+					</PopoverTrigger>
+
+					<PopoverContent
+						width='fit-content'
+						borderRadius={0}
+						backgroundColor='transparent'
+						border='none'
+						boxShadow='none'
+					>
+						{content}
+					</PopoverContent>
+				</Popover>
+			</OverlayContext.Provider>
+		</>
 	);
 };
 export { Overlay, OverlayContext };
