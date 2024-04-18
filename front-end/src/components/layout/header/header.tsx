@@ -1,9 +1,9 @@
 import LogoSvg from '@asset/svg/svg-logo.svg';
 import { Box } from '@chakra-ui/react';
 import { useSelector } from '@redux/store';
+import { motion } from 'framer-motion';
 import { RightBar } from './right-bar';
 import { SearchBar } from './search-bar';
-import { motion } from 'framer-motion';
 
 const Header = () => {
 	const visible = useSelector((state) => state.searchBar.visible);
@@ -20,22 +20,17 @@ const Header = () => {
 			right={0}
 			className='app-padding'
 			initial={{
-				height: 168,
+				height: 150,
 				alignItems: 'flex-start',
 				paddingTop: 16,
 			}}
 			animate={{
-				height: visible ? 168 : 80,
+				height: visible ? 150 : 80,
 				alignItems: visible ? 'flex-start' : 'center',
 				paddingTop: visible ? 16 : 0,
 			}}
 		>
-			<Box
-				style={{
-					color: 'var(--primary)',
-					paddingTop: visible ? 8 : 0,
-				}}
-			>
+			<Box color='primary.900'>
 				<LogoSvg />
 			</Box>
 

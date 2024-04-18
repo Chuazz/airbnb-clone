@@ -28,7 +28,7 @@
 
 .container-false {
 	&:hover {
-		background: var(--ebebeb);
+		background: var(--chakra-colors-white-700);
 	}
 
 	&::after {
@@ -38,11 +38,11 @@
 
 .container-true {
 	&:hover {
-		background: var(--ddd);
+		background: var(--chakra-colors-white-800);
 	}
 
 	&::after {
-		background: var(--ebebeb);
+		background: var(--chakra-colors-white-700);
 	}
 }
 
@@ -90,11 +90,11 @@
 }
 
 .container-border-false {
-	background: var(--ebebeb);
+	background: var(--chakra-colors-white-700);
 }
 
 .container-border-true {
-	background: var(--ddd);
+	background: var(--chakra-colors-white-800);
 }
 
 .container.hover-searching-right:hover {
@@ -106,7 +106,7 @@
 		content: '';
 		display: block;
 		left: 100%;
-		background: var(--ddd);
+		background: var(--chakra-colors-white-800);
 		height: calc(100% + 2px);
 		width: 55px;
 	}
@@ -125,7 +125,7 @@
 		content: '';
 		display: block;
 		right: 100%;
-		background: var(--ddd);
+		background: var(--chakra-colors-white-800);
 		height: calc(100% + 2px);
 		width: 55px;
 	}

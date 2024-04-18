@@ -115,7 +115,7 @@ const ActiveTab = () => {
 							background: '#fff',
 						}}
 						whileHover={{
-							background: tab.code === parentActiveTab ? '#fff' : 'var(--chakra-colors-gray-100)',
+							background: tab.code === parentActiveTab ? '#fff' : 'var(--chakra-colors-white-700)',
 						}}
 						onClick={() => {
 							tab.action?.();
@@ -127,6 +127,7 @@ const ActiveTab = () => {
 							fontWeight={tab.code === parentActiveTab ? '600' : '400'}
 							transition='all linear 0.1s'
 							color={tab.code === parentActiveTab ? 'gray.900' : 'gray.500'}
+							fontSize='lg'
 						>
 							{tab.label}
 						</TextShadow>

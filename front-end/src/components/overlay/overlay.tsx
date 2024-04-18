@@ -46,6 +46,7 @@ const Overlay = ({ children, content, ...props }: OverlayType) => {
 						backgroundColor='transparent'
 						border='none'
 						boxShadow='none'
+						zIndex={1}
 					>
 						{content}
 					</PopoverContent>

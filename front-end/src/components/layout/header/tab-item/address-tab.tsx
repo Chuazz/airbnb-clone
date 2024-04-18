@@ -18,6 +18,9 @@ const AddressTab = (data: OptionType<HeaderChildrenTabType>) => {
 			<ChildrenTabItem
 				tab={{
 					...data,
+					styles: {
+						paddingRight: 0,
+					},
 				}}
 			/>
 		</Overlay>

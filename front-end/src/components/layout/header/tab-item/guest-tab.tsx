@@ -15,7 +15,14 @@ const GuestTab = (data: OptionType<HeaderChildrenTabType>) => {
 				placement: 'bottom-end',
 			}}
 		>
-			<ChildrenTabItem tab={data} />
+			<ChildrenTabItem
+				tab={{
+					...data,
+					styles: {
+						paddingLeft: 0,
+					},
+				}}
+			/>
 		</Overlay>
 	);
 };

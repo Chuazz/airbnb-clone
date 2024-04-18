@@ -8,6 +8,7 @@ const themeConfig = extendTheme({
 		white: {
 			700: '#ebebeb',
 			800: '#dddddd',
+			900: '#ffffff',
 		},
 	},
 	gradients: {

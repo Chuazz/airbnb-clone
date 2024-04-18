@@ -38,6 +38,7 @@
 		"next-client-cookies": "^1.1.1",
 		"query-string": "^9.0.0",
 		"react": "^18",
+		"react-calendar": "^4.8.0",
 		"react-dom": "^18",
 		"react-hook-form": "^7.50.1",
 		"react-i18next": "^14.0.5",
