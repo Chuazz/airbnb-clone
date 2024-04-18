@@ -53,10 +53,10 @@ const SearchBar = () => {
 						isOpen={isOpen}
 						onOpen={onOpen}
 						onClose={onClose}
-						placement='bottom-start'
+						placement='bottom'
 					>
 						<PopoverTrigger>
-							<Box />
+							<Box width='100%' />
 						</PopoverTrigger>
 
 						<PopoverContent
