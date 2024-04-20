@@ -1,8 +1,8 @@
-import { Box, Button, Flex, Grid, Text } from '@chakra-ui/react';
+import { Box, Button, Flex, Grid, Text, useConst } from '@chakra-ui/react';
 import { useTranslation } from '@hook/use-translation';
 import { Range } from '@type/common';
 import { CalendarRefType } from '@type/ui/slider-calendar';
-import { isSameDay, isSameMonth, isSameYear, isWithinInterval, set } from 'date-fns';
+import { isSameDay, isSameMonth, isSameYear, isWithinInterval, set, startOfDay } from 'date-fns';
 import { MouseEvent, useRef, useState } from 'react';
 import { Calendar } from './calendar';
 import styles from './slider-calendar.module.scss';
@@ -47,12 +47,11 @@ const Weeks = () => {
 	);
 };
 
-const CURRENT_DATE = new Date();
-
 const SliderCalendar = () => {
 	const dateRefs = useRef<CalendarRefType[]>([]);
 	const scrollRef = useRef<HTMLDivElement | null>(null);
 	const calendarRef = useRef<HTMLDivElement | null>(null);
+	const CURRENT_DATE = useConst(() => startOfDay(new Date()));
 	const dates = dateRefs.current.flat();
 
 	const [months, setMonths] = useState([
@@ -71,15 +70,24 @@ const SliderCalendar = () => {
 	const onHover = (e: MouseEvent<HTMLDivElement, MouseEvent>) => {
 		const target = e.currentTarget;
 
-		if (target.matches(`.${styles['range-end']}`)) {
-			return;
-		}
-
 		if (!isSame(range[0], range[1])) {
+			target.classList.toggle(styles['date-no-bg']);
+
 			return;
 		}
 
 		const foundFirstRangeIndex = dates.findIndex((t) => t?.dataset.name === range[0].toDateString());
+
+		dates.forEach((date) => {
+			const check = isWithinInterval(new Date(date?.dataset.name!), {
+				start: set(range[0], { date: range[0].getDate() + 1 }),
+				end: set(new Date(target.dataset.name!), { date: new Date(target.dataset.name!).getDate() - 1 }),
+			});
+
+			if (check) {
+				date?.classList.toggle(styles['hover']);
+			}
+		});
 
 		if (isSame(range[0], range[1])) {
 			target.classList.toggle(styles['hover-end']);
@@ -88,39 +96,14 @@ const SliderCalendar = () => {
 		if (foundFirstRangeIndex > -1 && dates[foundFirstRangeIndex]) {
 			dates[foundFirstRangeIndex].classList.toggle(styles['hover-start']);
 		}
-
-		dates.forEach((date) => {
-			const check = isWithinInterval(new Date(date?.dataset.name!), {
-				start: range[0],
-				end: new Date(target.dataset.name!),
-			});
-
-			if (check) {
-				date?.classList.toggle(styles['hover']);
-			}
-		});
 	};
 
 	const onClick = (e: MouseEvent<HTMLDivElement, MouseEvent>) => {
 		const target = e.currentTarget;
 
-		target.classList.remove(styles['hover-end']);
-		target?.classList.remove(styles['hover']);
-
 		if (isSame(range[0], range[1])) {
 			setRange([range[0], new Date(target.dataset.name!)]);
 		}
-
-		dates.forEach((date) => {
-			const check = isWithinInterval(new Date(date?.dataset.name!), {
-				start: range[0],
-				end: new Date(target.dataset.name!),
-			});
-
-			if (check) {
-				date?.classList.add(styles['range']);
-			}
-		});
 	};
 
 	return (

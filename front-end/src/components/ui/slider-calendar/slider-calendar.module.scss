@@ -1,8 +1,8 @@
 .date {
 	&:hover {
-		border-radius: var(--chakra-radii-full) !important;
-		background-color: var(--chakra-colors-gray-900) !important;
-		color: var(--chakra-colors-white-900) !important;
+		border-radius: var(--chakra-radii-full);
+		background-color: var(--chakra-colors-gray-900);
+		color: var(--chakra-colors-white-900);
 	}
 
 	&::after {
@@ -30,34 +30,74 @@
 	}
 }
 
+.border {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	display: none;
+	left: 50%;
+	top: 50%;
+
+	&::after {
+		position: absolute;
+		content: '';
+		width: 100%;
+		height: 100%;
+		transform: translate(-50%, -50%);
+		background-color: transparent;
+		border: 1px solid var(--chakra-colors-gray-900);
+		border-radius: 9999px;
+		display: block;
+		z-index: -1;
+	}
+}
+
+.date.date-no-bg:not(.range-start):not(.range-end) {
+	&:hover {
+		border-radius: 0;
+		background-color: transparent;
+		color: var(--chakra-colors-gray-900);
+	}
+}
+
+.date.date-no-bg.hover:not(.range-start):not(.range-end) {
+	&:hover {
+		border-radius: 0;
+		background-color: var(--chakra-colors-blackAlpha-50);
+		color: var(--chakra-colors-gray-900);
+	}
+}
+
+.date-no-bg:not(.range-end):not(.range-start) .border {
+	display: block;
+}
+
 .hover-start,
-.range-start:not(.range-both-ends):not(.hover) {
+.range-start {
 	&::after {
 		display: block;
 	}
 }
 
 .hover-end,
-.range-end:not(.range-both-ends):not(.hover) {
+.range-end {
 	&::before {
 		display: block;
 	}
 }
 
-.active,
-.active:disabled,
 .hover,
-.hover.hover-start,
-.hover.hover-end {
-	background-color: var(--chakra-colors-gray-900) !important;
-	color: var(--chakra-colors-white-900) !important;
+.hover-start,
+.hover-end,
+.range-start,
+.range-end {
+	background-color: var(--chakra-colors-gray-900);
+	color: var(--chakra-colors-white-900);
 	border-radius: var(--chakra-radii-full);
 }
 
-.hover:not(.hover-start):not(.hover-end):not(.active),
-.active:not(.range-start):not(.range-end),
-.range {
-	background-color: var(--chakra-colors-blackAlpha-50) !important;
-	color: var(--chakra-colors-gray-900) !important;
+.hover:not(.hover-start):not(.hover-end) {
+	background-color: var(--chakra-colors-blackAlpha-50);
+	color: var(--chakra-colors-gray-900);
 	border-radius: 0;
 }

@@ -1,20 +1,10 @@
 import { Box, Center, Grid, Text } from '@chakra-ui/react';
 import { CalendarRefType, CalendarType } from '@type/ui/slider-calendar';
-import {
-	compareAsc,
-	eachDayOfInterval,
-	endOfMonth,
-	format,
-	isSameDay,
-	isSameMonth,
-	isThisMonth,
-	set,
-	startOfMonth,
-} from 'date-fns';
+import { eachDayOfInterval, endOfMonth, format, isSameDay, isSameMonth, set, startOfMonth } from 'date-fns';
 import { forwardRef, useImperativeHandle, useRef } from 'react';
 
-import styles from './slider-calendar.module.scss';
 import classNames from 'classnames';
+import styles from './slider-calendar.module.scss';
 
 const Calendar = forwardRef<CalendarRefType, CalendarType>(({ value, onHover, onClick, range }, ref) => {
 	const dayRefs = useRef<(HTMLDivElement | null)[]>([]);
@@ -54,7 +44,10 @@ const Calendar = forwardRef<CalendarRefType, CalendarType>(({ value, onHover, on
 				{format(value, 'MMMM dd')}
 			</Text>
 
-			<Grid templateColumns='repeat(7, 46px)'>
+			<Grid
+				templateColumns='repeat(7, 46px)'
+				rowGap={0.5}
+			>
 				{days.map((day, index) => (
 					<Center
 						key={day.toDateString()}
@@ -68,20 +61,14 @@ const Calendar = forwardRef<CalendarRefType, CalendarType>(({ value, onHover, on
 						className={classNames(styles['date'], {
 							[styles['range-start']]: isSameDay(day, range[0]) && isSameMonth(day, range[0]),
 							[styles['range-end']]: isSameDay(day, range[1]) && isSameMonth(day, range[1]),
-							[styles['active']]:
-								(isSameDay(day, range[0]) && isSameMonth(day, range[0])) ||
-								(isSameDay(day, range[1]) && isSameMonth(day, range[1])),
-							[styles['range-both-ends']]:
-								isSameDay(day, range[1]) &&
-								isSameMonth(day, range[1]) &&
-								isSameDay(day, range[0]) &&
-								isSameMonth(day, range[0]),
 						})}
 						onMouseEnter={onHover}
 						onMouseLeave={onHover}
 						onClick={onClick}
 					>
 						<Text fontWeight='semibold'>{day.getDate()}</Text>
+
+						<div className={styles['border']} />
 					</Center>
 				))}
 			</Grid>
