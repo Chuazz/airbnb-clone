@@ -1,0 +1,63 @@
+.date {
+	&:hover {
+		border-radius: var(--chakra-radii-full) !important;
+		background-color: var(--chakra-colors-gray-900) !important;
+		color: var(--chakra-colors-white-900) !important;
+	}
+
+	&::after {
+		content: '';
+		display: none;
+		position: absolute;
+		height: 100%;
+		right: 0;
+		top: 0;
+		width: 25px;
+		background-color: var(--chakra-colors-blackAlpha-50);
+		color: var(--chakra-colors-gray-900);
+	}
+
+	&::before {
+		content: '';
+		display: none;
+		position: absolute;
+		height: 100%;
+		left: 0;
+		top: 0;
+		width: 25px;
+		background-color: var(--chakra-colors-blackAlpha-50);
+		color: var(--chakra-colors-gray-900);
+	}
+}
+
+.hover-start,
+.range-start:not(.range-both-ends):not(.hover) {
+	&::after {
+		display: block;
+	}
+}
+
+.hover-end,
+.range-end:not(.range-both-ends):not(.hover) {
+	&::before {
+		display: block;
+	}
+}
+
+.active,
+.active:disabled,
+.hover,
+.hover.hover-start,
+.hover.hover-end {
+	background-color: var(--chakra-colors-gray-900) !important;
+	color: var(--chakra-colors-white-900) !important;
+	border-radius: var(--chakra-radii-full);
+}
+
+.hover:not(.hover-start):not(.hover-end):not(.active),
+.active:not(.range-start):not(.range-end),
+.range {
+	background-color: var(--chakra-colors-blackAlpha-50) !important;
+	color: var(--chakra-colors-gray-900) !important;
+	border-radius: 0;
+}

@@ -1,9 +1,8 @@
-import { Box, Flex, Grid, Text, VStack } from '@chakra-ui/react';
+import { Box, Flex, Text, VStack } from '@chakra-ui/react';
+import { SliderCalendar } from '@component/ui/slider-calendar/slider-calendar';
 import { useTranslation } from '@hook/use-translation';
 import { OptionType } from '@type/option';
-import moment from 'moment';
 import { useState } from 'react';
-import Calendar from 'react-calendar';
 
 type ValuePiece = Date | null;
 
@@ -102,16 +101,15 @@ const DateOverlay = () => {
 				position='relative'
 				w='100%'
 			>
-				<Calendar
+				{/* <Calendar
 					onChange={onChange}
 					defaultValue={value}
 					value={value}
 					className='react-calendar__hide-week react-calendar__hide-NeighboringMonth react-calendar__hide-arrow'
+					calendarType='hebrew'
 					showDoubleView={true}
+					showFixedNumberOfWeeks={false}
 					selectRange={true}
-					showNavigation={true}
-					showNeighboringMonth={false}
-					navigationLabel={({ date }) => <Text>{moment(date).format('MMMM YY')}</Text>}
 					tileDisabled={({ date }) => moment().isAfter(date)}
 				/>
 
@@ -126,6 +124,13 @@ const DateOverlay = () => {
 						fontWeight='semibold'
 						color='gray.600'
 					>
+						Su
+					</Text>
+					<Text
+						textAlign='center'
+						fontWeight='semibold'
+						color='gray.600'
+					>
 						Mo
 					</Text>
 					<Text
@@ -162,13 +167,6 @@ const DateOverlay = () => {
 						color='gray.600'
 					>
 						Sa
-					</Text>
-					<Text
-						textAlign='center'
-						fontWeight='semibold'
-						color='gray.600'
-					>
-						Su
 					</Text>
 				</Grid>
 
@@ -183,6 +181,13 @@ const DateOverlay = () => {
 						fontWeight='semibold'
 						color='gray.600'
 					>
+						Su
+					</Text>
+					<Text
+						textAlign='center'
+						fontWeight='semibold'
+						color='gray.600'
+					>
 						Mo
 					</Text>
 					<Text
@@ -220,14 +225,9 @@ const DateOverlay = () => {
 					>
 						Sa
 					</Text>
-					<Text
-						textAlign='center'
-						fontWeight='semibold'
-						color='gray.600'
-					>
-						Su
-					</Text>
-				</Grid>
+				</Grid> */}
+
+				<SliderCalendar />
 			</Box>
 
 			<Flex

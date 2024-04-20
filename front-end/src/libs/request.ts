@@ -1,8 +1,8 @@
 import { AuthenticationData, refresh } from '@directus/sdk';
 import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios';
-import moment from 'moment';
 import { client } from './directus';
 import { cookies } from './cookies';
+import { differenceInDays } from 'date-fns';
 
 const request = axios.create({
 	baseURL: process.env.NEXT_PUBLIC_DIRECTUS_PROJECT_URL,
@@ -14,7 +14,7 @@ const request = axios.create({
 
 request.interceptors.request.use(
 	(config) => {
-		const dayBeforeExpires = moment(parseInt(cookies.get('expires_at'))).diff(new Date(), 'day');
+		const dayBeforeExpires = differenceInDays(parseInt(cookies.get('expires_at')), new Date());
 
 		if (dayBeforeExpires > 0 && dayBeforeExpires <= 10) {
 			client.request(refresh('json', cookies.get('refresh_token'))).then(login);

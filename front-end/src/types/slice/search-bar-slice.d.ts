@@ -7,8 +7,10 @@ type SearchBarSliceType = {
 	childrenActive?: HeaderChildrenTabType;
 	params: {
 		address: string;
-		checkIn?: Date;
-		checkOut?: Date;
+		date?: {
+			start: Date;
+			end: Date;
+		};
 		guests: {
 			adult: number;
 			children: number;
