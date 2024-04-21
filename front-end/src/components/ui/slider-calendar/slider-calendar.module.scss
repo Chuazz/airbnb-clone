@@ -73,14 +73,14 @@
 }
 
 .hover-start,
-.range-start {
+.range-start:not(.range-end) {
 	&::after {
 		display: block;
 	}
 }
 
 .hover-end,
-.range-end {
+.range-end:not(.range-start) {
 	&::before {
 		display: block;
 	}
@@ -100,4 +100,20 @@
 	background-color: var(--chakra-colors-blackAlpha-50);
 	color: var(--chakra-colors-gray-900);
 	border-radius: 0;
+}
+
+.hover.last-day .bg-linear-right,
+.range-start .bg-linear-right,
+.range-end .bg-linear-right,
+.hover-end .bg-linear-right,
+.hover-start .bg-linear-right {
+	display: block;
+}
+
+.hover.first-day .bg-linear-left,
+.range-end .bg-linear-left,
+.range-start .bg-linear-left,
+.hover-end .bg-linear-left,
+.hover-start .bg-linear-left {
+	display: block;
 }

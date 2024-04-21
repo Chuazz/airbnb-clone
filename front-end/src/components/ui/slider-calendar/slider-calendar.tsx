@@ -1,11 +1,22 @@
-import { Box, Button, Flex, Grid, Text, useConst } from '@chakra-ui/react';
+import { Box, Button, Center, Flex, Grid, Text, useConst } from '@chakra-ui/react';
 import { useTranslation } from '@hook/use-translation';
 import { Range } from '@type/common';
 import { CalendarRefType } from '@type/ui/slider-calendar';
-import { isSameDay, isSameMonth, isSameYear, isWithinInterval, set, startOfDay } from 'date-fns';
+import {
+	eachMonthOfInterval,
+	endOfYear,
+	isSameDay,
+	isSameMonth,
+	isSameYear,
+	isWithinInterval,
+	set,
+	startOfDay,
+	startOfYear,
+} from 'date-fns';
 import { MouseEvent, useRef, useState } from 'react';
 import { Calendar } from './calendar';
 import styles from './slider-calendar.module.scss';
+import { ReactIcon } from '../react-icon';
 
 const Weeks = () => {
 	const { t } = useTranslation();
@@ -14,9 +25,9 @@ const Weeks = () => {
 	return (
 		<Flex
 			position='absolute'
-			top={10}
+			top={12}
 			width='100%'
-			gap='64px'
+			justifyContent='space-between'
 		>
 			<Grid gridTemplateColumns='repeat(7, 46px)'>
 				{days.map((day) => (
@@ -52,16 +63,19 @@ const SliderCalendar = () => {
 	const scrollRef = useRef<HTMLDivElement | null>(null);
 	const calendarRef = useRef<HTMLDivElement | null>(null);
 	const CURRENT_DATE = useConst(() => startOfDay(new Date()));
+	const [range, setRange] = useState<Range<Date>>([CURRENT_DATE, CURRENT_DATE]);
 	const dates = dateRefs.current.flat();
 
-	const [months, setMonths] = useState([
-		CURRENT_DATE,
-		set(CURRENT_DATE, { month: CURRENT_DATE.getMonth() + 1 }),
-		set(CURRENT_DATE, { month: CURRENT_DATE.getMonth() + 2 }),
-		set(CURRENT_DATE, { month: CURRENT_DATE.getMonth() + 3 }),
-	]);
+	const months = useConst(() => {
+		const end = endOfYear(CURRENT_DATE);
 
-	const [range, setRange] = useState<Range<Date>>([CURRENT_DATE, CURRENT_DATE]);
+		const result = eachMonthOfInterval({
+			start: CURRENT_DATE,
+			end: set(end, { year: end.getFullYear() + 2 }),
+		});
+
+		return result;
+	});
 
 	const isSame = (day1: Date, day2: Date) => {
 		return isSameDay(day1, day2) && isSameMonth(day1, day2) && isSameYear(day1, day2);
@@ -106,6 +120,24 @@ const SliderCalendar = () => {
 		}
 	};
 
+	const onSlide = (to: 'back' | 'forward') => {
+		if (!scrollRef.current || !calendarRef.current) {
+			return;
+		}
+
+		const translateX = new WebKitCSSMatrix(scrollRef.current.style.transform).m41;
+
+		if (to === 'back' && translateX < 0) {
+			scrollRef.current.style.transform = `translateX(${calendarRef.current?.clientWidth + 78 + translateX}px)`;
+		}
+
+		if (to === 'forward' && Math.abs(translateX) < (months.length - 2) * (calendarRef.current.clientWidth + 78)) {
+			scrollRef.current.style.transform = `translateX(-${
+				calendarRef.current?.clientWidth + 78 + Math.abs(translateX)
+			}px)`;
+		}
+	};
+
 	return (
 		<Box
 			position='relative'
@@ -114,8 +146,50 @@ const SliderCalendar = () => {
 			<Weeks />
 
 			<Flex
+				position='absolute'
+				top={0}
+				left={0}
+				right={0}
+				justifyContent='space-between'
+				alignItems='center'
+				zIndex={2}
+			>
+				<Center
+					width={8}
+					height={8}
+					borderRadius='full'
+					cursor='pointer'
+					_hover={{
+						backgroundColor: 'white.700',
+					}}
+					onClick={() => onSlide('back')}
+				>
+					<ReactIcon
+						icon='io-chevron-back'
+						boxSize={5}
+					/>
+				</Center>
+
+				<Center
+					width={8}
+					height={8}
+					borderRadius='full'
+					cursor='pointer'
+					_hover={{
+						backgroundColor: 'white.700',
+					}}
+					onClick={() => onSlide('forward')}
+				>
+					<ReactIcon
+						icon='io-chevron-forward'
+						boxSize={5}
+					/>
+				</Center>
+			</Flex>
+
+			<Flex
 				ref={scrollRef}
-				gap='64px'
+				gap='78px'
 				transition='all 0.2s linear'
 			>
 				{months.map((value, index) => (
@@ -137,31 +211,6 @@ const SliderCalendar = () => {
 					</Box>
 				))}
 			</Flex>
-			<Button
-				onClick={() => {
-					scrollRef.current.style.transform = `translateX(-${
-						calendarRef.current?.clientWidth +
-						64 +
-						Math.abs(new WebKitCSSMatrix(scrollRef.current?.style.transform).m41)
-					}px)`;
-				}}
-			>
-				click me
-			</Button>
-			<Button
-				onClick={() => {
-					scrollRef.current.style.transform = `translateX(${
-						calendarRef.current?.clientWidth + 64 + new WebKitCSSMatrix(scrollRef.current?.style.transform).m41
-					}px)`;
-
-					// scrollRef.current?.scrollTo({
-					// 	left: scrollRef.current.scroll + 100,
-					// 	behavior: 'smooth',
-					// });
-				}}
-			>
-				click me
-			</Button>
 		</Box>
 	);
 };

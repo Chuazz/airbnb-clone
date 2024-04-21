@@ -7,7 +7,7 @@ import { FiPhone } from 'react-icons/fi';
 import { HiOutlineMinus, HiOutlinePlus } from 'react-icons/hi';
 import { HiMiniMagnifyingGlass, HiMiniXMark } from 'react-icons/hi2';
 import { IoIosHelpCircleOutline } from 'react-icons/io';
-import { IoCheckmark } from 'react-icons/io5';
+import { IoCheckmark, IoChevronBack, IoChevronForward } from 'react-icons/io5';
 import { LiaExclamationCircleSolid } from 'react-icons/lia';
 import { RiGlobalLine } from 'react-icons/ri';
 import { TbDoorEnter, TbDoorExit, TbFingerprintScan, TbUserPlus } from 'react-icons/tb';
@@ -33,6 +33,8 @@ const iconConfig = {
 	'hi-mini-magnifying-glass': HiMiniMagnifyingGlass,
 	'hi-outline-minus': HiOutlineMinus,
 	'hi-outline-plus': HiOutlinePlus,
+	'io-chevron-forward': IoChevronForward,
+	'io-chevron-back': IoChevronBack,
 };
 
 export { iconConfig };
