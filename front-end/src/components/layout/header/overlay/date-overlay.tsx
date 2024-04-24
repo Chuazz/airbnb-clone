@@ -71,7 +71,7 @@ const DateOverlay = () => {
 			<Flex
 				alignItems='center'
 				gap={1}
-				p={1}
+				p='3px'
 				borderRadius='full'
 				backgroundColor='white.700'
 				width='fit-content'
@@ -80,8 +80,8 @@ const DateOverlay = () => {
 				{tabs.map((tab) => (
 					<Box
 						key={tab.code}
-						px={6}
-						py={1}
+						px={8}
+						py={2}
 						backgroundColor={tab.code === activeTab ? 'white' : 'transparent'}
 						borderRadius='full'
 						border='1px'
@@ -101,132 +101,6 @@ const DateOverlay = () => {
 				position='relative'
 				w='100%'
 			>
-				{/* <Calendar
-					onChange={onChange}
-					defaultValue={value}
-					value={value}
-					className='react-calendar__hide-week react-calendar__hide-NeighboringMonth react-calendar__hide-arrow'
-					calendarType='hebrew'
-					showDoubleView={true}
-					showFixedNumberOfWeeks={false}
-					selectRange={true}
-					tileDisabled={({ date }) => moment().isAfter(date)}
-				/>
-
-				<Grid
-					gridTemplateColumns='repeat(7, 46px)'
-					position='absolute'
-					left={0}
-					top='50px'
-				>
-					<Text
-						textAlign='center'
-						fontWeight='semibold'
-						color='gray.600'
-					>
-						Su
-					</Text>
-					<Text
-						textAlign='center'
-						fontWeight='semibold'
-						color='gray.600'
-					>
-						Mo
-					</Text>
-					<Text
-						textAlign='center'
-						fontWeight='semibold'
-						color='gray.600'
-					>
-						Tu
-					</Text>
-					<Text
-						textAlign='center'
-						fontWeight='semibold'
-						color='gray.600'
-					>
-						We
-					</Text>
-					<Text
-						textAlign='center'
-						fontWeight='semibold'
-						color='gray.600'
-					>
-						Th
-					</Text>
-					<Text
-						textAlign='center'
-						fontWeight='semibold'
-						color='gray.600'
-					>
-						Fr
-					</Text>
-					<Text
-						textAlign='center'
-						fontWeight='semibold'
-						color='gray.600'
-					>
-						Sa
-					</Text>
-				</Grid>
-
-				<Grid
-					gridTemplateColumns='repeat(7, 46px)'
-					position='absolute'
-					right={0}
-					top='50px'
-				>
-					<Text
-						textAlign='center'
-						fontWeight='semibold'
-						color='gray.600'
-					>
-						Su
-					</Text>
-					<Text
-						textAlign='center'
-						fontWeight='semibold'
-						color='gray.600'
-					>
-						Mo
-					</Text>
-					<Text
-						textAlign='center'
-						fontWeight='semibold'
-						color='gray.600'
-					>
-						Tu
-					</Text>
-					<Text
-						textAlign='center'
-						fontWeight='semibold'
-						color='gray.600'
-					>
-						We
-					</Text>
-					<Text
-						textAlign='center'
-						fontWeight='semibold'
-						color='gray.600'
-					>
-						Th
-					</Text>
-					<Text
-						textAlign='center'
-						fontWeight='semibold'
-						color='gray.600'
-					>
-						Fr
-					</Text>
-					<Text
-						textAlign='center'
-						fontWeight='semibold'
-						color='gray.600'
-					>
-						Sa
-					</Text>
-				</Grid> */}
-
 				<SliderCalendar />
 			</Box>
 
