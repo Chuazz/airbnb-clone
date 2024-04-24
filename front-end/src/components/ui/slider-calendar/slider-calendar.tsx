@@ -1,8 +1,8 @@
-import { Box, Button, Center, Flex, Grid, Text, useConst } from '@chakra-ui/react';
-import { useTranslation } from '@hook/use-translation';
+import { Box, Center, Flex, useConst } from '@chakra-ui/react';
 import { Range } from '@type/common';
 import { CalendarRefType } from '@type/ui/slider-calendar';
 import {
+	compareAsc,
 	eachMonthOfInterval,
 	endOfYear,
 	isSameDay,
@@ -11,58 +11,21 @@ import {
 	isWithinInterval,
 	set,
 	startOfDay,
-	startOfYear,
 } from 'date-fns';
 import { MouseEvent, useRef, useState } from 'react';
+import { ReactIcon } from '../react-icon';
 import { Calendar } from './calendar';
 import styles from './slider-calendar.module.scss';
-import { ReactIcon } from '../react-icon';
-
-const Weeks = () => {
-	const { t } = useTranslation();
-	const days = ['mo', 'tu', 'we', 'th', 'fri', 'sa', 'su'];
-
-	return (
-		<Flex
-			position='absolute'
-			top={12}
-			width='100%'
-			justifyContent='space-between'
-		>
-			<Grid gridTemplateColumns='repeat(7, 46px)'>
-				{days.map((day) => (
-					<Text
-						key={day}
-						textAlign='center'
-						fontWeight='semibold'
-						color='gray.600'
-					>
-						{t(`common:${day}`)}
-					</Text>
-				))}
-			</Grid>
-
-			<Grid gridTemplateColumns='repeat(7, 46px)'>
-				{days.map((day) => (
-					<Text
-						key={day}
-						textAlign='center'
-						fontWeight='semibold'
-						color='gray.600'
-					>
-						{t(`common:${day}`)}
-					</Text>
-				))}
-			</Grid>
-		</Flex>
-	);
-};
+import { Weeks } from './weeks';
+import { motion } from 'framer-motion';
 
 const SliderCalendar = () => {
+	const CURRENT_DATE = useConst(() => startOfDay(new Date()));
+	const GAP = useConst(() => 63);
 	const dateRefs = useRef<CalendarRefType[]>([]);
 	const scrollRef = useRef<HTMLDivElement | null>(null);
 	const calendarRef = useRef<HTMLDivElement | null>(null);
-	const CURRENT_DATE = useConst(() => startOfDay(new Date()));
+	const [translateX, setTranslateX] = useState(0);
 	const [range, setRange] = useState<Range<Date>>([CURRENT_DATE, CURRENT_DATE]);
 	const dates = dateRefs.current.flat();
 
@@ -83,6 +46,9 @@ const SliderCalendar = () => {
 
 	const onHover = (e: MouseEvent<HTMLDivElement, MouseEvent>) => {
 		const target = e.currentTarget;
+		const targetName = new Date(target.dataset.name!);
+		const isStart = compareAsc(targetName, range[0]) === -1;
+		const foundFirstRangeIndex = dates.findIndex((t) => t?.dataset.name === range[0].toDateString());
 
 		if (!isSame(range[0], range[1])) {
 			target.classList.toggle(styles['date-no-bg']);
@@ -90,12 +56,10 @@ const SliderCalendar = () => {
 			return;
 		}
 
-		const foundFirstRangeIndex = dates.findIndex((t) => t?.dataset.name === range[0].toDateString());
-
 		dates.forEach((date) => {
 			const check = isWithinInterval(new Date(date?.dataset.name!), {
-				start: set(range[0], { date: range[0].getDate() + 1 }),
-				end: set(new Date(target.dataset.name!), { date: new Date(target.dataset.name!).getDate() - 1 }),
+				start: isStart ? targetName : set(range[0], { date: range[0].getDate() + 1 }),
+				end: isStart ? range[0] : set(targetName, { date: targetName.getDate() - 1 }),
 			});
 
 			if (check) {
@@ -104,11 +68,25 @@ const SliderCalendar = () => {
 		});
 
 		if (isSame(range[0], range[1])) {
-			target.classList.toggle(styles['hover-end']);
+			if (compareAsc(targetName, range[0]) === -1) {
+				target.classList.toggle(styles['hover-start']);
+			}
+
+			if (compareAsc(targetName, range[0]) === 1) {
+				target.classList.toggle(styles['hover-end']);
+			}
 		}
 
 		if (foundFirstRangeIndex > -1 && dates[foundFirstRangeIndex]) {
-			dates[foundFirstRangeIndex].classList.toggle(styles['hover-start']);
+			const dateRefName = new Date(dates[foundFirstRangeIndex].dataset.name!);
+
+			if (compareAsc(dateRefName, targetName) === -1) {
+				dates[foundFirstRangeIndex].classList.toggle(styles['hover-start']);
+			}
+
+			if (compareAsc(dateRefName, targetName) === 1) {
+				dates[foundFirstRangeIndex].classList.toggle(styles['hover-end']);
+			}
 		}
 	};
 
@@ -125,16 +103,12 @@ const SliderCalendar = () => {
 			return;
 		}
 
-		const translateX = new WebKitCSSMatrix(scrollRef.current.style.transform).m41;
-
 		if (to === 'back' && translateX < 0) {
-			scrollRef.current.style.transform = `translateX(${calendarRef.current?.clientWidth + 78 + translateX}px)`;
+			setTranslateX(calendarRef.current?.clientWidth + GAP + translateX);
 		}
 
-		if (to === 'forward' && Math.abs(translateX) < (months.length - 2) * (calendarRef.current.clientWidth + 78)) {
-			scrollRef.current.style.transform = `translateX(-${
-				calendarRef.current?.clientWidth + 78 + Math.abs(translateX)
-			}px)`;
+		if (to === 'forward' && Math.abs(translateX) < (months.length - 2) * (calendarRef.current.clientWidth + GAP)) {
+			setTranslateX(-(calendarRef.current?.clientWidth + GAP + Math.abs(translateX)));
 		}
 	};
 
@@ -158,7 +132,7 @@ const SliderCalendar = () => {
 					width={8}
 					height={8}
 					borderRadius='full'
-					cursor='pointer'
+					cursor={translateX < 0 ? 'pointer' : 'not-allowed'}
 					_hover={{
 						backgroundColor: 'white.700',
 					}}
@@ -167,6 +141,7 @@ const SliderCalendar = () => {
 					<ReactIcon
 						icon='io-chevron-back'
 						boxSize={5}
+						color={translateX < 0 ? 'gray.900' : 'gray.500'}
 					/>
 				</Center>
 
@@ -174,7 +149,11 @@ const SliderCalendar = () => {
 					width={8}
 					height={8}
 					borderRadius='full'
-					cursor='pointer'
+					cursor={
+						Math.abs(translateX) < (months.length - 2) * (calendarRef.current?.clientWidth! + GAP)
+							? 'pointer'
+							: 'not-allowed'
+					}
 					_hover={{
 						backgroundColor: 'white.700',
 					}}
@@ -183,14 +162,26 @@ const SliderCalendar = () => {
 					<ReactIcon
 						icon='io-chevron-forward'
 						boxSize={5}
+						color={
+							Math.abs(translateX) < (months.length - 2) * (calendarRef.current?.clientWidth! + GAP)
+								? 'gray.900'
+								: 'gray.500'
+						}
 					/>
 				</Center>
 			</Flex>
 
 			<Flex
+				as={motion.div}
 				ref={scrollRef}
-				gap='78px'
+				gap={`${63}px`}
 				transition='all 0.2s linear'
+				initial={{
+					transform: 'translateX(0px)',
+				}}
+				animate={{
+					transform: `translateX(${translateX}px)`,
+				}}
 			>
 				{months.map((value, index) => (
 					<Box
@@ -198,13 +189,13 @@ const SliderCalendar = () => {
 						ref={calendarRef}
 					>
 						<Calendar
-							value={value}
-							range={range}
 							ref={(ref) => {
 								if (ref) {
 									dateRefs.current[index] = ref;
 								}
 							}}
+							value={value}
+							range={range}
 							onHover={onHover}
 							onClick={onClick}
 						/>

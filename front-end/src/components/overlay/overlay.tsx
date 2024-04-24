@@ -20,7 +20,6 @@ const Overlay = ({ children, content, ...props }: OverlayType) => {
 					isOpen={isOpen}
 					onClose={onClose}
 					onOpen={onOpen}
-					isLazy={true}
 					{...props.popoverProps}
 				>
 					<PopoverTrigger>

@@ -62,7 +62,7 @@ const DateOverlay = () => {
 			py={8}
 			px='64px'
 			width='850px'
-			height='calc(100vh - 170px)'
+			maxHeight='calc(100vh - 170px)'
 			overflow='auto'
 			borderRadius='5xl'
 			spacing={6}
